@@ -53,7 +53,7 @@ public class CharitySearchTest {
                 .andExpect(view().name("charitySearchResults"))
                 .andExpect(model().attribute("searchTerm", "NSPCC"))
                 .andExpect(model().attribute("matches", hasItem(nspcc)))
-                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div>","<span>NSPCC</span>","<span>Kids charity</span>","<span>12345678</span>","</div>"))));
+                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=charityListContainer","<span>NSPCC</span>","<span>Kids charity</span>","<span>12345678</span>","</div>"))));
                 ;
 
 
@@ -77,7 +77,7 @@ public class CharitySearchTest {
                 .andExpect(view().name("charitySearchResults"))
                 .andExpect(model().attribute("searchTerm", "Cancer Research UK"))
                 .andExpect(model().attribute("matches", iterableWithSize(0)))
-                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div>","No matching charity","</div>"))));
+                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=missingCharityMessage>","No matching charity","</div>"))));
         ;
 
 
