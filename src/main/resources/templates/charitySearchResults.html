@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Charity Search Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<H1>Matches for <span th:text="${searchTerm}"></span></H1>
+
+<div id=missingCharityMessage th:if="${#lists.isEmpty(matches)}">
+    <div>No matching charity</div>
+</div>
+
+<div id=charityListContainer th:if="${not #lists.isEmpty(matches)}">
+    <div th:each="charity : ${matches}">
+        <div th:object="${charity}">
+            <span th:text="*{name}"/>
+            <span th:text="*{description}"/>
+            <span th:text="*{registrationNumber}"/>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
