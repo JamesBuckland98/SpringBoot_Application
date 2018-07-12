@@ -60,6 +60,30 @@ public class CharitySearchTest {
 
     }
 
+    /**
+     * What should happen if the charity can't be found?
+     * Page should say that no charities could be matched and offer a link back to home page.
+     */
+
+    @Test
+    public void shouldNotFindCRUK() throws Exception {
+
+        mockMvc.perform(post("/findCharity")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("name", "Cancer Research UK")
+
+        )
+                .andExpect(status().isOk())
+                .andExpect(view().name("charitySearchResults"))
+                .andExpect(model().attribute("searchTerm", "Cancer Research UK"))
+                .andExpect(model().attribute("matches", iterableWithSize(0)))
+                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div>","No matching charity","</div>"))));
+        ;
+
+
+
+    }
+
 
 }
 

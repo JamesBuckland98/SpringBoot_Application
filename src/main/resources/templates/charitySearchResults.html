@@ -6,18 +6,23 @@
 </head>
 <body>
 
+<H1>Matches for <span th:text="${searchTerm}"></span></H1>
+
+<div th:if="${#lists.isEmpty(matches)}">
+    <div>No matching charity</div>
+</div>
 
 <div th:if="${not #lists.isEmpty(matches)}">
-    <H1>Matches for <span th:text="${searchTerm}"></span></H1>
-</div>
-
-<div th:each="charity : ${matches}">
-    <div th:object="${charity}">
-        <span th:text="*{name}"/>
-        <span th:text="*{description}"/>
-        <span th:text="*{registrationNumber}"/>
+    <div th:each="charity : ${matches}">
+        <div th:object="${charity}">
+            <span th:text="*{name}"/>
+            <span th:text="*{description}"/>
+            <span th:text="*{registrationNumber}"/>
+        </div>
     </div>
 </div>
+
+
 
 
 </body>
