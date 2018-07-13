@@ -4,6 +4,7 @@ import com.nsa.cm6213.example.charity2018.domain.Charity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CharityServiceStatic implements CharityService {
@@ -34,5 +35,13 @@ public class CharityServiceStatic implements CharityService {
                 .filter(c -> c.getName().equals(searchTerm))
                 .collect(Collectors.toList());
     }
+
+    public Optional<Charity> findByRegistrationNumber(String regNo) {
+        return theCharities
+                .stream()
+                .filter(c -> c.getRegistrationNumber().equals(regNo))
+                .findFirst();
+    }
+
 
 }

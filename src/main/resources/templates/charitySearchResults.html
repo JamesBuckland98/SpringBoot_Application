@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<div th:replace="fragments/header :: header"></div>
+
 <H1>Matches for <span th:text="${searchTerm}"></span></H1>
 
 <div id=missingCharityMessage th:if="${#lists.isEmpty(matches)}">
@@ -13,16 +15,29 @@
 </div>
 
 <div id=charityListContainer th:if="${not #lists.isEmpty(matches)}">
-    <div th:each="charity : ${matches}">
-        <div th:object="${charity}">
-            <span th:text="*{name}"/>
-            <span th:text="*{description}"/>
-            <span th:text="*{registrationNumber}"/>
-        </div>
-    </div>
+    <table>
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Registration Number</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="charity : ${matches}">
+            <td>
+                <a th:href="@{/charity/{regId} (regId=${charity.registrationNumber})}">
+                    <span th:text="${charity.name}"></span>
+                </a>
+            </td>
+            <td th:text="${charity.registrationNumber}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
 </div>
 
-
+<div th:replace="fragments/footer :: footer">
 
 
 </body>
