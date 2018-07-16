@@ -2,19 +2,29 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${charity.name}"></title>
+    <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
+
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"></div>
 
-<H1 th:text="${charity.name}">
+<div id=missingCharityMessage th:if="${charity ==  null }">
+    <div>No matching charity</div>
+</div>
 
-</H1>
 
-<img th:attr="src=@{/images/${charity.logoPath}}"/>
+<div id=charityInfo th:if="${charity}">
 
-<div th:text="${charity.description}"></div>
+    <H1 th:text="${charity.name}">
+
+    </H1>
+
+    <img th:attr="src=@{/images/${charity.logoPath}}"/>
+
+    <div th:text="${charity.description}"></div>
+
+</div>
 
 
 <div th:replace="fragments/footer :: footer">

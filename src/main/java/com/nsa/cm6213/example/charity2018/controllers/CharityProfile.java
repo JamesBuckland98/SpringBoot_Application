@@ -24,7 +24,9 @@ public class CharityProfile {
         CharityService charityService = CharityServiceStatic.getInstance();
         Optional<Charity> charity = charityService.findByRegistrationNumber(reg);
 
-        model.addAttribute("charity", charity.get());
+        if (charity.isPresent()) {
+            model.addAttribute("charity", charity.get());
+        }
 
         return "CharityProfile";
 

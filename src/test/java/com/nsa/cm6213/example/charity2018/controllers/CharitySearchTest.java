@@ -1,12 +1,6 @@
 package com.nsa.cm6213.example.charity2018.controllers;
 
 
-import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,11 +11,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 /**
- * @see https://spring.io/guides/gs/testing-web/
+ * @see "http://spring.io/guides/gs/testing-web/"
  */
 
 
@@ -53,7 +52,7 @@ public class CharitySearchTest {
                 .andExpect(view().name("charitySearchResults"))
                 .andExpect(model().attribute("searchTerm", "NSPCC"))
                 .andExpect(model().attribute("matches", hasItem(nspcc)))
-                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=charityListContainer","<span>NSPCC</span>","<span>Kids charity</span>","<span>12345678</span>","</div>"))));
+                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=charityListContainer", "NSPCC", "12345678", "</div>"))));
                 ;
 
 
