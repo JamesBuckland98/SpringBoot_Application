@@ -1,25 +1,20 @@
 package com.nsa.cm6213.example.charity2018.services;
 
 import com.nsa.cm6213.example.charity2018.domain.Charity;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class CharityServiceStatic implements CharityService {
 
-    private static CharityServiceStatic theInstance;
+    //private static CharityServiceStatic theInstance;
     private List<Charity> theCharities;
 
-    public static CharityService getInstance(){
-        if (theInstance == null){
-            theInstance = new CharityServiceStatic();
-        }
-        return theInstance;
-    }
-
-    private CharityServiceStatic(){
+    public CharityServiceStatic() {
 
         theCharities = new ArrayList<Charity>();
         theCharities.add(new Charity("NSPCC","Kids charity","nspcc", "12345678", true));
