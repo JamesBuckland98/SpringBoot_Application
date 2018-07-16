@@ -1,6 +1,7 @@
 package com.nsa.cm6213.example.charity2018.controllers;
 
 
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResourceException;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import com.nsa.cm6213.example.charity2018.services.CharityService;
 import com.nsa.cm6213.example.charity2018.services.CharityServiceStatic;
@@ -26,6 +27,8 @@ public class CharityProfile {
 
         if (charity.isPresent()) {
             model.addAttribute("charity", charity.get());
+        } else {
+            throw new MissingResourceException("No such charity", "/findCharity");
         }
 
         return "CharityProfile";

@@ -31,8 +31,8 @@ public class CharityProfileTest {
 
     @Test
     public void shouldReturnA404() throws Exception {
-        this.mockMvc.perform(get("/charity/12345678999")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("No Matching Charity")));
+        this.mockMvc.perform(get("/charity/12345678999")).andDo(print()).andExpect(status().isNotFound())
+                .andExpect(content().string(containsString("No such charity")));
     }
 
 
