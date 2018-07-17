@@ -51,8 +51,8 @@ public class CharitySearchTest {
     @Test
     public void shouldFindNSPCC() throws Exception {
 
-        Charity nspcc = new Charity("NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity("RSPCA", "Animal charity", "rspca", "87654321", true);
+        Charity nspcc = new Charity("National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
+        Charity rspca = new Charity("Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(nspcc);
         charities.add(rspca);
@@ -68,7 +68,7 @@ public class CharitySearchTest {
                 .andExpect(view().name("charitySearchResults"))
                 .andExpect(model().attribute("searchTerm", "NSPCC"))
                 .andExpect(model().attribute("matches", hasItem(nspcc)))
-                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=charityListContainer", "NSPCC", "12345678", "</div>"))));
+                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=charityListContainer", "National Society", "12345678", "</div>"))));
                 ;
 
 
@@ -83,8 +83,8 @@ public class CharitySearchTest {
     @Test
     public void shouldNotFindCRUK() throws Exception {
 
-        Charity nspcc = new Charity("NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity("RSPCA", "Animal charity", "rspca", "87654321", true);
+        Charity nspcc = new Charity("National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
+        Charity rspca = new Charity("Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(nspcc);
         charities.add(rspca);

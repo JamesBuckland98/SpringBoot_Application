@@ -20,7 +20,7 @@
 
     </H1>
 
-    <img th:attr="src=@{/images/${charity.logoPath}}"/>
+    <img th:attr="src=@{'/images/'+${charity.logoPath}+'.png'}"/>
 
     <div th:text="${charity.description}"></div>
 

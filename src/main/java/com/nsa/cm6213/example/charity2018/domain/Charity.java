@@ -8,6 +8,7 @@ import lombok.Data;
 public class Charity {
 
     private String name;
+    private String acronym;
     private String description;
     private String logoPath;
     private String registrationNumber;
