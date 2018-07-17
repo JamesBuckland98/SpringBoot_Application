@@ -36,8 +36,8 @@ public class CharityProfileTest {
     @Test
     public void shouldReturnNSPCC() throws Exception {
 
-        Charity nspcc = new Charity("NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity("RSPCA", "Animal charity", "rspca", "87654321", true);
+        Charity nspcc = new Charity("National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
+        Charity rspca = new Charity("Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(nspcc);
         charities.add(rspca);
@@ -46,7 +46,7 @@ public class CharityProfileTest {
 
 
         this.mockMvc.perform(get("/charity/12345678")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("NSPCC")));
+                .andExpect(content().string(containsString("National Society")));
     }
 
     @Test

@@ -8,7 +8,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -23,15 +26,15 @@ public class CharityRepositoryTest {
     public void findCharityByRegistrationNumber() {
         Charity aCharity = this.charityRepository.findByRegistrationNumber("12345678").get();
 
-        assertThat(aCharity.getName()).isEqualTo("NSPCC");
+        assertThat(aCharity.getAcronym()).isEqualTo("NSPCC");
         assertThat(aCharity.getLogoPath()).isEqualTo("nspcc");
     }
 
     @Test
-    public void findCharityByName() {
-        Charity aCharity = this.charityRepository.findByName("NSPCC").get(0);
+    public void findCharityByAcronymInSearch() {
+        Charity aCharity = this.charityRepository.findBySearchTerm("NSPCC").get(0);
 
-        assertThat(aCharity.getName()).isEqualTo("NSPCC");
+        assertThat(aCharity.getAcronym()).isEqualTo("NSPCC");
         assertThat(aCharity.getLogoPath()).isEqualTo("nspcc");
     }
 
@@ -40,12 +43,22 @@ public class CharityRepositoryTest {
      * This test should fail, but MySQL queries are not case-sensitive
      */
     @Test
-    public void findCharityByLowerCaseName() {
-        Charity aCharity = this.charityRepository.findByName("nspcc").get(0);
+    public void findCharityByAcronymInSearchLowerCase() {
+        Charity aCharity = this.charityRepository.findBySearchTerm("nspcc").get(0);
 
-        assertThat(aCharity.getName()).isEqualTo("NSPCC");
+        assertThat(aCharity.getAcronym()).isEqualTo("NSPCC");
         assertThat(aCharity.getLogoPath()).isEqualTo("nspcc");
     }
+
+    @Test
+    public void findCharityBySearchForCancer() {
+        List<Charity> cancerCharities = this.charityRepository.findBySearchTerm("cancer");
+
+        assertEquals(3, cancerCharities.size());
+        assertThat(cancerCharities.get(0).getAcronym()).isEqualTo("CRUK"); //What's wrong with this test???
+
+    }
+
 
 
 }

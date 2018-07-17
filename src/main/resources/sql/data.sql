@@ -4109,6 +4109,10 @@ where id % 5=0;
 
 /**************************************************************************************/
 
+UPDATE `donations`.`charity` SET `name` = 'National Society for Preventation of Cruelty to Children', `acronym` = 'NSPCC' WHERE (`id` = '1');
+UPDATE `donations`.`charity` SET `acronym` = 'CRUK' WHERE (`id` = '2');
+UPDATE `donations`.`charity` SET `acronym` = 'BHF' WHERE (`id` = '6');
+UPDATE `donations`.`charity` SET `acronym` = 'KRUK' WHERE (`id` = '7');
 
 
 

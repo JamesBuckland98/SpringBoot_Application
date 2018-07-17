@@ -25,6 +25,9 @@ public class CharityRepositoryJdbc implements CharityRepository {
     @Value("${sql.charities.all}")
     private String charitiesAllSQL;
 
+    @Value("${sql.charity.by.search}")
+    private String charitiesBySearchSQL;
+
 
 
     @Autowired
@@ -39,6 +42,7 @@ public class CharityRepositoryJdbc implements CharityRepository {
 
         charityMapper = (rs, i) -> new Charity(
                 rs.getString("name"),
+                rs.getString("acronym"),
                 rs.getString("purpose"),
                 rs.getString("logo_file_name"),
                 rs.getString("registration_id"),
@@ -83,6 +87,14 @@ public class CharityRepositoryJdbc implements CharityRepository {
                         charityMapper
                 ));
     }
+
+    public List<Charity> findBySearchTerm(String term) {
+        return jdbcTemplate.query(
+                charitiesBySearchSQL,
+                new Object[]{term, "%" + term + "%"},
+                charityMapper);
+    }
+
 
 
 }

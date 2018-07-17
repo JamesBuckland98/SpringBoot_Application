@@ -22,9 +22,9 @@ public class CharityServiceStatic implements CharityService {
         charityRepository = aRepo;
         theCharities = new ArrayList<Charity>();
 
-        theCharities.add(new Charity("BHF","Heart charity","bhf", "34567890", true));
-        theCharities.add(new Charity("Tenovus","Cancer charity","tenovus", "56789012", true));
-        theCharities.add(new Charity("Oxfam","Famine charity","oxfam", "98765432", true));
+        theCharities.add(new Charity("British Heart Foundation", "BHF", "Heart charity", "bhf", "34567890", true));
+        theCharities.add(new Charity("Tenovus", "", "Cancer charity", "tenovus", "56789012", true));
+        theCharities.add(new Charity("Oxfam", "", "Famine charity", "oxfam", "98765432", true));
     }
 
     public List<Charity> findCharities(String searchTerm){

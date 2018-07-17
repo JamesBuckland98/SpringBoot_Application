@@ -10,6 +10,8 @@ public interface CharityRepository {
 
     public Optional<Charity> findOne(Long id);
 
+    public List<Charity> findBySearchTerm(String name);
+
     public List<Charity> findByName(String name);
 
     public List<Charity> findAll();
