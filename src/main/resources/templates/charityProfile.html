@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div id=missingCharityMessage th:if="${charity ==  null }">
+    <div>No matching charity</div>
+</div>
+
+
+<div id=charityInfo th:if="${charity}">
+
+    <H1 th:text="${charity.name}">
+
+    </H1>
+
+    <img th:attr="src=@{/images/${charity.logoPath}}"/>
+
+    <div th:text="${charity.description}"></div>
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer">
+</div>
+
+
+</body>
+</html>

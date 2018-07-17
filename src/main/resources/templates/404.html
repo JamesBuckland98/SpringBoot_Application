@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page Not Found</title>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div id=missingCharityMessage>
+    <div th:text="${message}">That does not exist</div>
+</div>
+
+<div th:replace="fragments/footer :: footer">
+</div>
+
+
+</body>
+</html>
