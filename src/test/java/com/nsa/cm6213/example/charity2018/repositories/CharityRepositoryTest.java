@@ -27,4 +27,25 @@ public class CharityRepositoryTest {
         assertThat(aCharity.getLogoPath()).isEqualTo("nspcc");
     }
 
+    @Test
+    public void findCharityByName() {
+        Charity aCharity = this.charityRepository.findByName("NSPCC").get(0);
+
+        assertThat(aCharity.getName()).isEqualTo("NSPCC");
+        assertThat(aCharity.getLogoPath()).isEqualTo("nspcc");
+    }
+
+
+    /**
+     * This test should fail, but MySQL queries are not case-sensitive
+     */
+    @Test
+    public void findCharityByLowerCaseName() {
+        Charity aCharity = this.charityRepository.findByName("nspcc").get(0);
+
+        assertThat(aCharity.getName()).isEqualTo("NSPCC");
+        assertThat(aCharity.getLogoPath()).isEqualTo("nspcc");
+    }
+
+
 }
