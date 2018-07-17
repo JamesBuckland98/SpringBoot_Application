@@ -2,31 +2,40 @@ package com.nsa.cm6213.example.charity2018.repositories;
 
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.TreeMap;
 
 @Repository
 public class CharityRepositoryJdbc implements CharityRepository {
 
     private JdbcTemplate jdbcTemplate;
     private RowMapper<Charity> charityMapper;
-    private Map<String, String> queries;
+
+    @Value("${sql.charity.by.name}")
+    private String charityByNameSQL;
+
+    @Value("${sql.charity.by.regid}")
+    private String charityByRegIdSQL;
+
+    @Value("${sql.charities.all}")
+    private String charitiesAllSQL;
+
+
 
     @Autowired
     public CharityRepositoryJdbc(JdbcTemplate aTemplate) {
         jdbcTemplate = aTemplate;
 
-        queries = new TreeMap<String, String>();
+        System.out.println(charityByRegIdSQL);
+        System.out.println(charityByNameSQL);
+        System.out.println(charitiesAllSQL);
 
-        queries.put("charity_by_name", "select id, name, purpose, logo_file_name, registration_id  from charity where name=?");
-        queries.put("charity_by_regid", "select id, name, purpose, logo_file_name, registration_id  from charity where registration_id=?");
-        queries.put("charities all", "select id, name, purpose, logo_file_name, registration_id  from charity");
+
 
         charityMapper = (rs, i) -> new Charity(
                 rs.getString("name"),
@@ -41,18 +50,15 @@ public class CharityRepositoryJdbc implements CharityRepository {
     public Optional<Charity> findOne(Long id) {
 
 
-        Charity aCharity = jdbcTemplate.queryForObject(
-                queries.get("charity_by_id"),
-                new Object[]{id},
-                charityMapper);
+        //TODO
 
-        return Optional.ofNullable(aCharity);
+        return Optional.empty();
     }
 
     @Override
     public List<Charity> findByName(String aName) {
         return jdbcTemplate.query(
-                queries.get("charity_by_name"),
+                charityByNameSQL,
                 new Object[]{aName},
                 charityMapper);
 
@@ -60,7 +66,8 @@ public class CharityRepositoryJdbc implements CharityRepository {
 
     @Override
     public List<Charity> findAll() {
-        return jdbcTemplate.query(queries.get("charities all"),
+        return jdbcTemplate.query(
+                charitiesAllSQL,
                 new Object[]{},
                 charityMapper);
     }
@@ -68,9 +75,10 @@ public class CharityRepositoryJdbc implements CharityRepository {
     @Override
     public Optional<Charity> findByRegistrationNumber(String regNo) {
 
+
         return Optional.ofNullable(
                 jdbcTemplate.queryForObject(
-                        queries.get("charity_by_regid"),
+                        charityByRegIdSQL,
                         new Object[]{regNo},
                         charityMapper
                 ));
