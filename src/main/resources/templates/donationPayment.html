@@ -9,11 +9,11 @@
 
 <div th:replace="fragments/header :: header"></div>
 
-<div id=donorDetails>
-
-    <a href="/payment">
-        <span>Make payment</span>
-    </a>
+<div id=paymentDetails>
+    <div>
+        Make payment for &nbsp;
+        <div th:text="${regId}"/>
+    </div>
 
 </div>
 

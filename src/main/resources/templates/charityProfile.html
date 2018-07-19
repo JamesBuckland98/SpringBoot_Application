@@ -24,6 +24,10 @@
 
     <div th:text="${charity.description}"></div>
 
+    <a th:href="@{/donate/{regId} (regId=${charity.registrationNumber})}">
+        <span>Donate</span>
+    </a>
+
 </div>
 
 
