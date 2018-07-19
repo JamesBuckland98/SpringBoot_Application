@@ -5,9 +5,9 @@ import com.nsa.cm6213.example.charity2018.services.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -23,17 +23,20 @@ public class CharitySearchController {
     }
 
     @RequestMapping(path = "/findCharity", method = RequestMethod.GET) //handles a form POST to /name
-    public String postName(@ModelAttribute CharityForm in_form, Model model) { //ModelAttribute maps the form to an object
+    //public String postName(@ModelAttribute CharityForm in_form, Model model) { //ModelAttribute maps the form to an object
+    public String postName(@RequestParam String name, Model model) { //ModelAttribute maps the form to an object
 
         //remove singleton call.  Spring now wires in the service
         //CharityService charityService = CharityServiceStatic.getInstance();
 
-        List<Charity> matchingCharities = charityService.findCharities(in_form.getName());
+        //String searchTerm  = in_form.getName();
 
-        System.out.println("name equals " + in_form.getName());//we can access the form as a normal object
-        System.out.println("matching charity = " + matchingCharities);
+        //System.out.println("name equals " + in_form.getName());//we can access the form as a normal object
 
-        model.addAttribute("searchTerm", in_form.getName());
+        List<Charity> matchingCharities = charityService.findCharities(name);
+
+
+        model.addAttribute("searchTerm", name);
         model.addAttribute("matches", matchingCharities);
 
 
