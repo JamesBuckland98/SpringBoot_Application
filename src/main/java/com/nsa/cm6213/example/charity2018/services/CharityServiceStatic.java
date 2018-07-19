@@ -29,7 +29,7 @@ public class CharityServiceStatic implements CharityService {
 
     public List<Charity> findCharities(String searchTerm){
 
-        return charityRepository.findByName(searchTerm);
+        return charityRepository.findBySearchTerm(searchTerm);
 
 //        return theCharities
 //                .stream()

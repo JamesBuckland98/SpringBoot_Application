@@ -22,7 +22,7 @@ public class CharitySearchController {
         charityService = aService;
     }
 
-    @RequestMapping(path = "/findCharity", method = RequestMethod.POST) //handles a form POST to /name
+    @RequestMapping(path = "/findCharity", method = RequestMethod.GET) //handles a form POST to /name
     public String postName(@ModelAttribute CharityForm in_form, Model model) { //ModelAttribute maps the form to an object
 
         //remove singleton call.  Spring now wires in the service
