@@ -19,7 +19,6 @@ import java.util.Arrays;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -59,7 +58,7 @@ public class CharitySearchTest {
 
         given(this.charityService.findCharities("NSPCC")).willReturn(charities);
 
-        mockMvc.perform(post("/findCharity")
+        mockMvc.perform(get("/findCharity")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "NSPCC")
 
@@ -91,7 +90,7 @@ public class CharitySearchTest {
 
         given(this.charityService.findCharities("NSPCC")).willReturn(charities);
 
-        mockMvc.perform(post("/findCharity")
+        mockMvc.perform(get("/findCharity")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("name", "Cancer Research UK")
 
