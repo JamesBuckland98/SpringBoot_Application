@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-@SessionAttributes("regId")
+@SessionAttributes({"regId", "donor"})
 @Controller
 public class DonationController {
 
@@ -26,14 +26,31 @@ public class DonationController {
 
     }
 
-    @RequestMapping(path = "/payment", method = RequestMethod.GET)
-    public String takePaymentForDonation(@SessionAttribute String regId, Model model) {
+    @RequestMapping(path="donorDetails", method=RequestMethod.POST)
+    public String donorDetails(DonorForm donor, @SessionAttribute String regId, Model model ){
+
+        System.out.println(donor);
 
         System.out.println("From session..." + regId);
-
+        model.addAttribute("donor",donor);
         model.addAttribute("regId", regId);
         return "donationPayment";
     }
+
+    @RequestMapping(path="makePayment", method=RequestMethod.POST)
+    public String donorDetails(PaymentForm payment, @SessionAttribute DonorForm donor, @SessionAttribute String regId, Model model ){
+
+        System.out.println("From session..." + donor);
+
+        System.out.println("From session..." + regId);
+        System.out.println(payment);
+        model.addAttribute("last4Card",payment.getCardNumber().substring(payment.getCardNumber().length()-4));
+        model.addAttribute("donor",donor);
+        model.addAttribute("regId", regId);
+        return "paymentConfirmation";
+    }
+
+
 
 
 }

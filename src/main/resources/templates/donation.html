@@ -11,6 +11,24 @@
 
 <div id=donorDetails>
 
+    Please enter your details
+
+    <form action="/donorDetails" method="post">
+
+        <input type="text" name="name" id="name" value="Your name"/><br>
+        <input type="text" name="addressLine1" id="addressLine1" value="Address Line 1"/><br>
+        <input type="text" name="addressLine2" id="addressLine2" value="Address Line 2"/><br>
+        <input type="text" name="addressLine3" id="addressLine3" value="Address Line 3"/><br>
+        <input type="text" name="postcode" id="postcode" value="Postcode"/><br>
+
+        <input type="checkbox" name="isGiftAidEligible" id="isGiftAidEligible"/><br>
+
+        <input type="submit" id="submit" value="submit"/><br>
+
+    </form>
+
+
+
     <a href="/payment">
         <span>Make payment</span>
     </a>
