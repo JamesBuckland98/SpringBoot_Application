@@ -24,7 +24,7 @@
 
     <div th:text="${charity.description}"></div>
 
-    <a th:href="@{/donate/{regId} (regId=${charity.registrationNumber})}">
+    <a th:href="@{/donate/{id} (regId=${charity.id})}">
         <span>Donate</span>
     </a>
 

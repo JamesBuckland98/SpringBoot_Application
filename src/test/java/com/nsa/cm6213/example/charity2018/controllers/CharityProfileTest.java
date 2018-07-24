@@ -34,10 +34,10 @@ public class CharityProfileTest {
     CharityService charityService;
 
     @Test
-    public void shouldReturnNSPCC() throws Exception {
+    public void shouldReturnNSPCCByRegId() throws Exception {
 
         Charity nspcc = new Charity(2L,"National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity(3L,"Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
+        //Charity rspca = new Charity(3L,"Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(nspcc);
         //charities.add(rspca);
@@ -45,7 +45,7 @@ public class CharityProfileTest {
         given(this.charityService.findByRegistrationNumber("12345678")).willReturn(charities);
 
 
-        this.mockMvc.perform(get("/charity/12345678")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/charity?reg=12345678")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("National Society")))
         ;
     }
@@ -62,7 +62,7 @@ public class CharityProfileTest {
         given(this.charityService.findById(2L)).willReturn(Optional.of(nspcc));
 
 
-        this.mockMvc.perform(get("/charity/12345678")).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(get("/charity/2")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("National Society")))
         ;
     }
@@ -79,7 +79,7 @@ public class CharityProfileTest {
         given(this.charityService.findByRegistrationNumber("12345678")).willReturn(charities);
 
 
-        this.mockMvc.perform(get("/charity/12345678")).andDo(print()).andExpect(status().isConflict())
+        this.mockMvc.perform(get("/charity?reg=12345678")).andDo(print()).andExpect(status().isConflict())
                 .andExpect(content().string(containsString("More than one")))
         ;
     }
@@ -91,7 +91,7 @@ public class CharityProfileTest {
         given(this.charityService.findByRegistrationNumber("123456789")).willReturn(new ArrayList<Charity>());
 
 
-        this.mockMvc.perform(get("/charity/123456789")).andDo(print()).andExpect(status().isNotFound())
+        this.mockMvc.perform(get("/charity?reg=123456789")).andDo(print()).andExpect(status().isNotFound())
                 .andExpect(content().string(containsString("No such charity")));
     }
 

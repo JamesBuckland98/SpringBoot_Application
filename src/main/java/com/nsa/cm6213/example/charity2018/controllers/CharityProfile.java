@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +27,29 @@ public class CharityProfile {
     }
 
 
-    @RequestMapping(path = "/charity/{reg}", method = RequestMethod.GET)
-    public String getCharityProfile(@PathVariable String reg, Model model) {
+    @RequestMapping(path = "/charity/{id}", method = RequestMethod.GET)
+    public String getCharityProfile(@PathVariable Long id, Model model) {
 
-        System.out.println(reg);
+
+        Optional<Charity> charity = charityService.findById(id);
+
+        System.out.println(charity.get());
+
+        if (charity.isPresent()) {
+            model.addAttribute("charity", charity.get());
+        } else {
+            throw new MissingResourceException("No such charity", "/findCharity");
+        }
+
+
+        return "CharityProfile";
+
+
+    }
+
+    @RequestMapping(path = "/charity", method = RequestMethod.GET)
+    public String getCharityProfile(@RequestParam String  reg, Model model) {
+
 
         List<Charity> charity = charityService.findByRegistrationNumber(reg);
 
@@ -46,6 +66,8 @@ public class CharityProfile {
 
 
     }
+
+
 
 }
 
