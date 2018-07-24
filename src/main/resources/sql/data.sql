@@ -4115,4 +4115,9 @@ UPDATE `donations`.`charity` SET `acronym` = 'BHF' WHERE (`id` = '6');
 UPDATE `donations`.`charity` SET `acronym` = 'KRUK' WHERE (`id` = '7');
 
 
+INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('20', '88888888', 'Cats Protection League (Cardiff)', 'Helping cats', 'cpl');
+INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('21', '88888888', 'Cats Protection League (Swansea)', 'Helping cats', 'cpl');
+
+
+
 
