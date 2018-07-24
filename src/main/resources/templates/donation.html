@@ -15,11 +15,7 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div id="charityDetails">
-
     <!-- Inject Charity Details here-->
-
-
-
 </div>
 
 <div id=donorDetails>
@@ -58,9 +54,8 @@
     "<img src=\"/images/{logoPath}.png\"/>";
 
 
-    //var src = document.getElementById('hello').textContent;
     // Compile the template under the name 'hello'
-    var compiled = dust.compile(template, 'hello');
+    var compiled = dust.compile(template, 'charityInfo');
     // Register the template with Dust
     dust.loadSource(compiled);
 
@@ -83,7 +78,7 @@
             , encode: true
         })
             .done(function (data) {
-                dust.render('hello',
+                dust.render('charityInfo',
                     data,
                     function (err, out) {
                         console.log(out);
