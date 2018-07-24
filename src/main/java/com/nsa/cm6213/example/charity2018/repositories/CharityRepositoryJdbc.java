@@ -41,6 +41,7 @@ public class CharityRepositoryJdbc implements CharityRepository {
 
 
         charityMapper = (rs, i) -> new Charity(
+                rs.getLong("id"),
                 rs.getString("name"),
                 rs.getString("acronym"),
                 rs.getString("purpose"),

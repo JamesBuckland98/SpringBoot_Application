@@ -50,8 +50,8 @@ public class CharitySearchTest {
     @Test
     public void shouldFindNSPCC() throws Exception {
 
-        Charity nspcc = new Charity("National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity("Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
+        Charity nspcc = new Charity(2L,"National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
+        Charity rspca = new Charity(3L, "Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(nspcc);
         charities.add(rspca);
@@ -82,8 +82,8 @@ public class CharitySearchTest {
     @Test
     public void shouldNotFindCRUK() throws Exception {
 
-        Charity nspcc = new Charity("National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity("Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
+        Charity nspcc = new Charity(2L,"National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
+        Charity rspca = new Charity(3L, "Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(nspcc);
         charities.add(rspca);
