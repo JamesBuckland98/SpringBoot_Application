@@ -50,9 +50,9 @@ public class CharityApiTest {
         Charity rspca = new Charity(3L,"Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(nspcc);
-        charities.add(rspca);
+        //charities.add(rspca);
 
-        given(this.charityService.findByRegistrationNumber("12345678")).willReturn(Optional.of(nspcc));
+        given(this.charityService.findByRegistrationNumber("12345678")).willReturn(charities);
 
 
         this.mockMvc.perform(get("/api/charity/12345678").contentType(MediaType.APPLICATION_JSON))

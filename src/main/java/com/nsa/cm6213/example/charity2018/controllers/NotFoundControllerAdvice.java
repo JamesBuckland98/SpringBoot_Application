@@ -1,6 +1,7 @@
 package com.nsa.cm6213.example.charity2018.controllers;
 
 import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResourceException;
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.NonUniqueResourceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,5 +29,23 @@ public class NotFoundControllerAdvice {
         return mav;
 
     }
+
+
+    @ResponseStatus(HttpStatus.CONFLICT)  // 404
+    @ExceptionHandler(NonUniqueResourceException.class)
+    public ModelAndView handleNonUniqueResource(HttpServletRequest req, Exception e) {
+
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("exception", e);
+        mav.addObject("url", req.getRequestURL());
+        mav.addObject("message", e.getMessage());
+        mav.setViewName(DEFAULT_MISSING_RESOURCE_VIEW);
+        return mav;
+
+    }
+
+
+
 }
 
