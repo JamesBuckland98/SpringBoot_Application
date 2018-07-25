@@ -47,25 +47,7 @@ public class CharityProfile {
 
     }
 
-    @RequestMapping(path = "/charity", method = RequestMethod.GET)
-    public String getCharityProfile(@RequestParam String  reg, Model model) {
 
-
-        List<Charity> charity = charityService.findByRegistrationNumber(reg);
-
-        if (charity.size() == 1) {
-            model.addAttribute("charity", charity.get(0));
-        } else if (charity.size() > 1) {
-            throw new NonUniqueResourceException("More than one charity has that registration id", "/findCharity");
-        } else {
-            throw new MissingResourceException("No such charity", "/findCharity");
-        }
-
-
-        return "CharityProfile";
-
-
-    }
 
 
 

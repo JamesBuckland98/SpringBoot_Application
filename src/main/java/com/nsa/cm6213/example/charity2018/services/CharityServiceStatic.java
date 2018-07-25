@@ -25,16 +25,8 @@ public class CharityServiceStatic implements CharityService {
     public List<Charity> findCharities(String searchTerm){
 
         return charityRepository.findBySearchTerm(searchTerm);
-
-//        return theCharities
-//                .stream()
-//                .filter(c -> c.getName().equals(searchTerm))
-//                .collect(Collectors.toList());
     }
 
-    public List<Charity> findByRegistrationNumber(String regNo) {
-        return charityRepository.findByRegistrationNumber(regNo);
-    }
 
     public Optional<Charity> findById(Long id){
         return charityRepository.findOne(id);

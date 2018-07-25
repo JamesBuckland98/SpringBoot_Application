@@ -24,7 +24,7 @@ public class CharityRepositoryTest {
 
     @Test
     public void findCharityByRegistrationNumber() {
-        Charity aCharity = this.charityRepository.findByRegistrationNumber("12345678").get(0);
+        Charity aCharity = this.charityRepository.findBySearchTerm("12345678").get(0);
 
         assertThat(aCharity.getAcronym()).isEqualTo("NSPCC");
         assertThat(aCharity.getLogoPath()).isEqualTo("nspcc");

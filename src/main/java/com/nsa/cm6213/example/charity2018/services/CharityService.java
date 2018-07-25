@@ -8,9 +8,6 @@ import java.util.Optional;
 public interface CharityService {
 
     public List<Charity> findCharities(String searchTerm);
-
-    public List<Charity> findByRegistrationNumber(String regNo);
-
     public Optional<Charity> findById(Long id);
 
 }

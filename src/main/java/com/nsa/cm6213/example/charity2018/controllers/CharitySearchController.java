@@ -1,5 +1,7 @@
 package com.nsa.cm6213.example.charity2018.controllers;
 
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResourceException;
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.NonUniqueResourceException;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import com.nsa.cm6213.example.charity2018.services.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +24,26 @@ public class CharitySearchController {
         charityService = aService;
     }
 
-    @RequestMapping(path = "/findCharity", method = RequestMethod.GET) //handles a form POST to /name
-    //public String postName(@ModelAttribute CharityForm in_form, Model model) { //ModelAttribute maps the form to an object
-    public String postName(@RequestParam String name, Model model) { //ModelAttribute maps the form to an object
 
-        //remove singleton call.  Spring now wires in the service
-        //CharityService charityService = CharityServiceStatic.getInstance();
-
-        //String searchTerm  = in_form.getName();
-
-        //System.out.println("name equals " + in_form.getName());//we can access the form as a normal object
-
-        List<Charity> matchingCharities = charityService.findCharities(name);
+    @RequestMapping(path = "/findCharity", method = RequestMethod.GET)
+    public String getCharityProfile(@RequestParam("search") String search, Model model) {
 
 
-        model.addAttribute("searchTerm", name);
-        model.addAttribute("matches", matchingCharities);
+        List<Charity> charity = charityService.findCharities(search);
+
+        if (charity.size() == 1) {
+            model.addAttribute("searchTerm", search);
+            model.addAttribute("matches", charity);
+        } else if (charity.size() > 1) {
+            throw new NonUniqueResourceException("More than one charity has that registration id", "/findCharity");
+        } else {
+            throw new MissingResourceException("No such charity", "/findCharity");
+        }
 
 
         return "charitySearchResults"; //the return is the name of the next page (but we're not doing templating, so we redirect to the home page.
+
+
     }
 
     /*

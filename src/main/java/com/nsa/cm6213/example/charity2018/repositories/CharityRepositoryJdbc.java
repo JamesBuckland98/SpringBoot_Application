@@ -80,22 +80,10 @@ public class CharityRepositoryJdbc implements CharityRepository {
                 charityMapper);
     }
 
-    @Override
-    public List<Charity> findByRegistrationNumber(String regNo) {
-
-
-        return
-                jdbcTemplate.query(
-                        charityByRegIdSQL,
-                        new Object[]{regNo},
-                        charityMapper
-                );
-    }
-
     public List<Charity> findBySearchTerm(String term) {
         return jdbcTemplate.query(
                 charitiesBySearchSQL,
-                new Object[]{term, "%" + term + "%"},
+                new Object[]{term, "%" + term + "%", term},
                 charityMapper);
     }
 

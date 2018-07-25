@@ -24,13 +24,13 @@ public class CharityAPI {
         charityService = aService;
     }
 
-    @RequestMapping(path="/charity/{reg}", method=RequestMethod.GET)
-    public ResponseEntity<Charity> getCharity(@PathVariable String reg, Model model){
+    @RequestMapping(path = "/charity/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Charity> getCharity(@PathVariable Long id, Model model) {
 
-        List<Charity> charity = charityService.findByRegistrationNumber(reg);
+        Optional<Charity> charity = charityService.findById(id);
 
-        if (charity.size()==1) {
-            return ResponseEntity.status(HttpStatus.OK).body(charity.get(0));
+        if (charity.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(charity.get());
 
         } else {
             throw new MissingResourceException("No such charity");
