@@ -15,11 +15,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static java.util.EnumSet.allOf;
+import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -54,6 +59,11 @@ public class CharityProfileTest {
 
         this.mockMvc.perform(get("/charity/2")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("National Society")))
+//                .andExpect(model().attribute("charity",
+//                        hasItem(allOf(
+//                                    hasProperty("id", is(2L)),
+//                                    hasProperty("acronym", is("NSPCC")),
+//                                    hasProperty("logoPath", is("nspcc"))))
         ;
     }
 
