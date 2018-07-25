@@ -33,6 +33,10 @@ public class CharityProfileTest {
     @MockBean
     CharityService charityService;
 
+    /**
+     * This tests the search by registration id function.  Could this be merged into the standard search?
+     * @throws Exception
+     */
     @Test
     public void shouldReturnNSPCCByRegId() throws Exception {
 
@@ -50,6 +54,12 @@ public class CharityProfileTest {
         ;
     }
 
+
+    /**
+     * This is the main API for getting access to a specific charity.  The issue here is that it reveals the internal id.
+     *
+     * @throws Exception
+     */
     @Test
     public void shouldReturnNSPCCById() throws Exception {
 
@@ -66,6 +76,11 @@ public class CharityProfileTest {
                 .andExpect(content().string(containsString("National Society")))
         ;
     }
+
+    /**
+     * This is an interesting test.  It fails, but it is doing the right thing.  Makes me think that this search option should be merged into the main search API
+     * @throws Exception
+     */
 
     @Test
     public void shouldReturnTwoCatsAndFail() throws Exception {

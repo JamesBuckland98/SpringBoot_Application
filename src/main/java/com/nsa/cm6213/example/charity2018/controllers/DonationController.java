@@ -18,7 +18,7 @@ public class DonationController {
         charityService = aService;
     }
 
-    @RequestMapping(path = "/donate/id", method = RequestMethod.GET)
+    @RequestMapping(path = "/donate/{id}", method = RequestMethod.GET)
     public String startDonation(@PathVariable Long id, Model model) {
 
         model.addAttribute("id", id);
@@ -37,7 +37,7 @@ public class DonationController {
         return "donationPayment";
     }
 
-    @RequestMapping(path="makePayment", method=RequestMethod.POST)
+    @RequestMapping(path="paymentDetails", method=RequestMethod.POST)
     public String donorDetails(PaymentForm payment, @SessionAttribute DonorForm donor, @SessionAttribute Long id, Model model ){
 
         System.out.println("From session..." + donor);

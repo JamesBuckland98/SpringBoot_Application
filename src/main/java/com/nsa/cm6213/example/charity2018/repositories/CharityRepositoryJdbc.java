@@ -57,7 +57,7 @@ public class CharityRepositoryJdbc implements CharityRepository {
 
         return Optional.of(
                 jdbcTemplate.queryForObject(
-                        charityByNameSQL,
+                        charityByIdSQL,
                         new Object[]{id},
                         charityMapper)
         );
