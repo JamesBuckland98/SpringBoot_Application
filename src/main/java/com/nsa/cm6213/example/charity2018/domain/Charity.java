@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class Charity {
 
+    private Long id;
     private String name;
     private String acronym;
     private String description;

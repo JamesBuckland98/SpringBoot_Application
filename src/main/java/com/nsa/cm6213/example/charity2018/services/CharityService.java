@@ -9,6 +9,8 @@ public interface CharityService {
 
     public List<Charity> findCharities(String searchTerm);
 
-    public Optional<Charity> findByRegistrationNumber(String regNo);
+    public List<Charity> findByRegistrationNumber(String regNo);
+
+    public Optional<Charity> findById(Long id);
 
 }

@@ -16,6 +16,9 @@ public class CharityRepositoryJdbc implements CharityRepository {
     private JdbcTemplate jdbcTemplate;
     private RowMapper<Charity> charityMapper;
 
+    @Value("${sql.charity.by.id}")
+    private String charityByIdSQL;
+
     @Value("${sql.charity.by.name}")
     private String charityByNameSQL;
 
@@ -29,7 +32,6 @@ public class CharityRepositoryJdbc implements CharityRepository {
     private String charitiesBySearchSQL;
 
 
-
     @Autowired
     public CharityRepositoryJdbc(JdbcTemplate aTemplate) {
         jdbcTemplate = aTemplate;
@@ -39,8 +41,8 @@ public class CharityRepositoryJdbc implements CharityRepository {
         System.out.println(charitiesAllSQL);
 
 
-
         charityMapper = (rs, i) -> new Charity(
+                rs.getLong("id"),
                 rs.getString("name"),
                 rs.getString("acronym"),
                 rs.getString("purpose"),
@@ -53,10 +55,12 @@ public class CharityRepositoryJdbc implements CharityRepository {
     @Override
     public Optional<Charity> findOne(Long id) {
 
-
-        //TODO
-
-        return Optional.empty();
+        return Optional.of(
+                jdbcTemplate.queryForObject(
+                        charityByIdSQL,
+                        new Object[]{id},
+                        charityMapper)
+        );
     }
 
     @Override
@@ -77,15 +81,15 @@ public class CharityRepositoryJdbc implements CharityRepository {
     }
 
     @Override
-    public Optional<Charity> findByRegistrationNumber(String regNo) {
+    public List<Charity> findByRegistrationNumber(String regNo) {
 
 
-        return Optional.ofNullable(
-                jdbcTemplate.queryForObject(
+        return
+                jdbcTemplate.query(
                         charityByRegIdSQL,
                         new Object[]{regNo},
                         charityMapper
-                ));
+                );
     }
 
     public List<Charity> findBySearchTerm(String term) {
@@ -94,7 +98,6 @@ public class CharityRepositoryJdbc implements CharityRepository {
                 new Object[]{term, "%" + term + "%"},
                 charityMapper);
     }
-
 
 
 }

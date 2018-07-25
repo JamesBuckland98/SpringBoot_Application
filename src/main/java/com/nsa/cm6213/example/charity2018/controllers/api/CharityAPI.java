@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,13 +27,14 @@ public class CharityAPI {
     @RequestMapping(path="/charity/{reg}", method=RequestMethod.GET)
     public ResponseEntity<Charity> getCharity(@PathVariable String reg, Model model){
 
-        Optional<Charity> charity = charityService.findByRegistrationNumber(reg);
+        List<Charity> charity = charityService.findByRegistrationNumber(reg);
 
-        if (charity.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(charity.get());
+        if (charity.size()==1) {
+            return ResponseEntity.status(HttpStatus.OK).body(charity.get(0));
 
         } else {
             throw new MissingResourceException("No such charity");
+            //TODO add duplicate charity handling
         }
     }
 

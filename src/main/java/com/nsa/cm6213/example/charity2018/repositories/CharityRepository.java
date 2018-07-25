@@ -16,7 +16,7 @@ public interface CharityRepository {
 
     public List<Charity> findAll();
 
-    public Optional<Charity> findByRegistrationNumber(String regNo);
+    public List<Charity> findByRegistrationNumber(String regNo);
 
 
 }

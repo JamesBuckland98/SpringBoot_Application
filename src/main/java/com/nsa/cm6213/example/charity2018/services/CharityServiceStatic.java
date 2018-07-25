@@ -20,11 +20,6 @@ public class CharityServiceStatic implements CharityService {
     public CharityServiceStatic(CharityRepository aRepo) {
 
         charityRepository = aRepo;
-        theCharities = new ArrayList<Charity>();
-
-        theCharities.add(new Charity("British Heart Foundation", "BHF", "Heart charity", "bhf", "34567890", true));
-        theCharities.add(new Charity("Tenovus", "", "Cancer charity", "tenovus", "56789012", true));
-        theCharities.add(new Charity("Oxfam", "", "Famine charity", "oxfam", "98765432", true));
     }
 
     public List<Charity> findCharities(String searchTerm){
@@ -37,9 +32,14 @@ public class CharityServiceStatic implements CharityService {
 //                .collect(Collectors.toList());
     }
 
-    public Optional<Charity> findByRegistrationNumber(String regNo) {
+    public List<Charity> findByRegistrationNumber(String regNo) {
         return charityRepository.findByRegistrationNumber(regNo);
     }
+
+    public Optional<Charity> findById(Long id){
+        return charityRepository.findOne(id);
+    }
+
 
 
 }
