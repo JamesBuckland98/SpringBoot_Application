@@ -29,15 +29,10 @@ public class CharityServiceStatic implements CharityService {
     }
 
 
-    public Charity findById(Long id) {
+    public Optional<Charity> findById(Long id) {
 
-        Optional<Charity> charity = charityRepository.findOne(id);
+        return charityRepository.findOne(id);
 
-        if (charity.isPresent()) {
-            return charity.get();
-        } else {
-            throw new MissingResourceException("No charity with id" + id);
-        }
     }
 
 

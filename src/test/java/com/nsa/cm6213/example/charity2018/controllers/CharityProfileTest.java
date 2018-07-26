@@ -48,13 +48,12 @@ public class CharityProfileTest {
 
         Charity nspcc = new Charity(2L,"National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
 
-        given(this.charityService.findById(2L)).willReturn(nspcc);
+        given(this.charityService.findById(2L)).willReturn(Optional.of(nspcc));
 
 
         this.mockMvc.perform(get("/charity/2")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("National Society")))
                 .andExpect(model().attribute("charity",
-
                         allOf(
                                 hasProperty("id", is(2L)),
                                 hasProperty("acronym", is("NSPCC")),
@@ -67,12 +66,11 @@ public class CharityProfileTest {
 
         Charity nspcc = new Charity(2L, "National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
 
-        given(this.charityService.findById(2L)).willReturn(nspcc);
-        given(this.charityService.findById(3L)).willThrow(new MissingResourceException("No such charity"));
-
+        given(this.charityService.findById(2L)).willReturn(Optional.of(nspcc));
+        given(this.charityService.findById(3L)).willReturn(Optional.empty());
 
         this.mockMvc.perform(get("/charity/3")).andDo(print()).andExpect(status().isNotFound())
-                .andExpect(content().string(containsString("No such charity")))
+                .andExpect(content().string(containsString("No matching charity")))
 
         ;
     }

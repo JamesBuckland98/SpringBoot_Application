@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/api")
+@RequestMapping(path = "/api")
 public class CharityAPI {
 
     private CharityService charityService;
@@ -27,14 +27,15 @@ public class CharityAPI {
     @RequestMapping(path = "/charity/{id}", method = RequestMethod.GET)
     public ResponseEntity<Charity> getCharity(@PathVariable Long id, Model model) {
 
-        try {
-            Charity charity = charityService.findById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(charity);
-        } catch (MissingResourceException e) {
-            throw e;
-        }
-    }
 
+        Optional<Charity> charity = charityService.findById(id);
+        if (charity.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(charity.get());
+        } else {
+            throw new MissingResourceException("No matching charity");
+        }
+
+    }
 
 
 }

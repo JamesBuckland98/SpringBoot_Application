@@ -52,7 +52,7 @@ public class CharityApiTest {
         charities.add(nspcc);
         //charities.add(rspca);
 
-        given(this.charityService.findById(2L)).willReturn(nspcc);
+        given(this.charityService.findById(2L)).willReturn(Optional.of(nspcc));
 
 
         this.mockMvc.perform(get("/api/charity/2").contentType(MediaType.APPLICATION_JSON))

@@ -10,6 +10,6 @@ public interface CharityService {
 
     public List<Charity> findCharities(String searchTerm);
 
-    public Charity findById(Long id) throws MissingResourceException;
+    public Optional<Charity> findById(Long id);
 
 }

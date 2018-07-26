@@ -30,19 +30,13 @@ public class CharityProfile {
     @RequestMapping(path = "/charity/{id}", method = RequestMethod.GET)
     public String getCharityProfile(@PathVariable Long id, Model model) {
 
-//        try {
-//            Charity charity = charityService.findById(id);
-//            model.addAttribute("charity", charity);
-//            return "CharityProfile";
-//        }
-//        catch(MissingResourceException e){
-//            throw e;
-//        }
-
-
-        Charity charity = charityService.findById(id);
-        model.addAttribute("charity", charity);
-        return "CharityProfile";
+        Optional<Charity> charity = charityService.findById(id);
+        if (charity.isPresent()) {
+            model.addAttribute("charity", charity.get());
+            return "CharityProfile";
+        } else {
+            throw new MissingResourceException("No matching charity", "404");
+        }
 
     }
 
