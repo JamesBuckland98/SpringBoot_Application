@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
 
-    <script src="/js/dustjs-2.7.2/dist/dust-full.js"></script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src = "/js/js-url-2.5.3/url.js" ></script >
 
+    <!--
+
+    -->
 
 </head>
 <body>
@@ -30,6 +30,10 @@
         <input type="text" name="addressLine3" id="addressLine3" value="Address Line 3"/><br>
         <input type="text" name="postcode" id="postcode" value="Postcode"/><br>
 
+        How much would you like to donate? (GB pounds only at present)
+
+        <input type="text" name="donationAmount" id="donationAmount" value="0.00"/><br>
+
         Please tick this box to confirm that we can claim Gift Aid on this donation.
 
         <input type="checkbox" name="isGiftAidEligible" id="isGiftAidEligible"/><br>
@@ -44,55 +48,19 @@
 
 <div th:replace="fragments/footer :: footer">
 </div>
-
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="/js/dustjs-2.7.2/dist/dust-full.js"></script>
+<script src="/js/js-url-2.5.3/url.js"></script>
+<script src="/js/app/charity.js"></script>
 <script type="text/javascript">
 
-    //dust.config.cache=false;
-
-    var template = "Thank you for supporting {name}."+
-    "<H1>{acronym}</h1>"+
-    "<img src=\"/images/{logoPath}.png\"/>";
-
-
-    // Compile the template under the name 'hello'
-    var compiled = dust.compile(template, 'charityInfo');
-    // Register the template with Dust
-    dust.loadSource(compiled);
-
-
-
-    $(document).ready(function() {
-
-
-        $.ajaxSetup({cache: false});
-
+    $(document).ready(function () {
         var id = $.url(2);
-
-        $.ajax({//send the AJAX request
-            type: "GET",
-            url: "/api/charity/" + id,
-            dataType: "json"
-            , cache: false
-            , timeout: 600000
-            , async: true
-            , encode: true
-        })
-            .done(function (data) {
-                dust.render('charityInfo',
-                    data,
-                    function (err, out) {
-                        console.log(out);
-                        // `out` contains the rendered output.
-                        document.getElementById('charityDetails').innerHTML = out;
-                    }
-                )
-            })
-            .fail(function (jqXHR, textStatus, errorThrown) { //and what to do if it fails
-                console.log("failed");
-            });
+        injectCharity(id);
     });
-
-
 
 </script>
 

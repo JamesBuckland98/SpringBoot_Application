@@ -15,6 +15,7 @@ public class DonorForm {
     private String addressLine2;
     private String addressLine3;
     private String postcode;
+    private Double donationAmount;
     private Boolean isGiftAidEligible=Boolean.FALSE;
 
 }

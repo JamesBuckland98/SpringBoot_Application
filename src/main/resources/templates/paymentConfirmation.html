@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
 
+
+    <!--
+    -->
 </head>
 <body>
 
@@ -11,18 +14,22 @@
 
 <div id=paymentConfirmation>
 
-        Thank you : <br>
-        <div th:text="${donor.name}"></div>
+    Thank you : <br>
+    <div th:text="${donor.name}"></div>
 
-    </div>
-    For your donation to: <br>
-        <div th:text="${id}"/>
+</div>
+You are about to donate
+<div th:text="${donor.donationAmount}"></div>
+to: <br>
+<div id="charityDetails">
+    <!-- Inject Charity Details here-->
+</div>
 
-    </div>
+Using card: <br>
+<div th:text="'**** **** ****'+${last4Card}">
+</div>
 
-    Using card: <br>
-    <div th:text = "'**** **** ****'+${last4Card}">
-    </div>
+<a href="confirm">Confirm</a>
 
 
 </div>
@@ -30,6 +37,31 @@
 
 <div th:replace="fragments/footer :: footer">
 </div>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="/js/dustjs-2.7.2/dist/dust-full.js"></script>
+<script src="/js/js-url-2.5.3/url.js"></script>
+<script src="/js/app/charity.js"></script>
+
+<script th:inline="javascript">
+
+    var id = [[${id}]];
+
+
+</script>
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        injectCharity(id);
+    });
+
+</script>
 
 
 </body>
