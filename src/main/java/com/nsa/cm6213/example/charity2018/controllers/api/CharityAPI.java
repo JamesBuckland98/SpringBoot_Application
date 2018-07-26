@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/api")
+@RequestMapping(path = "/api")
 public class CharityAPI {
 
     private CharityService charityService;
@@ -24,20 +24,18 @@ public class CharityAPI {
         charityService = aService;
     }
 
-    @RequestMapping(path="/charity/{reg}", method=RequestMethod.GET)
-    public ResponseEntity<Charity> getCharity(@PathVariable String reg, Model model){
+    @RequestMapping(path = "/charity/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Charity> getCharity(@PathVariable Long id, Model model) {
 
-        List<Charity> charity = charityService.findByRegistrationNumber(reg);
 
-        if (charity.size()==1) {
-            return ResponseEntity.status(HttpStatus.OK).body(charity.get(0));
-
+        Optional<Charity> charity = charityService.findById(id);
+        if (charity.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(charity.get());
         } else {
-            throw new MissingResourceException("No such charity");
-            //TODO add duplicate charity handling
+            throw new MissingResourceException("No matching charity");
         }
-    }
 
+    }
 
 
 }

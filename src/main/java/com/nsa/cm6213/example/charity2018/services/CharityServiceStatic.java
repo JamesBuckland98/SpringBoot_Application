@@ -1,5 +1,6 @@
 package com.nsa.cm6213.example.charity2018.services;
 
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResourceException;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import com.nsa.cm6213.example.charity2018.repositories.CharityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,24 +23,17 @@ public class CharityServiceStatic implements CharityService {
         charityRepository = aRepo;
     }
 
-    public List<Charity> findCharities(String searchTerm){
+    public List<Charity> findCharities(String searchTerm) {
 
         return charityRepository.findBySearchTerm(searchTerm);
-
-//        return theCharities
-//                .stream()
-//                .filter(c -> c.getName().equals(searchTerm))
-//                .collect(Collectors.toList());
     }
 
-    public List<Charity> findByRegistrationNumber(String regNo) {
-        return charityRepository.findByRegistrationNumber(regNo);
-    }
 
-    public Optional<Charity> findById(Long id){
+    public Optional<Charity> findById(Long id) {
+
         return charityRepository.findOne(id);
-    }
 
+    }
 
 
 }

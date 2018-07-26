@@ -38,6 +38,50 @@ public class CharitySearchTest {
     @MockBean
     CharityService charityService;
 
+    /**
+     * This tests the search by registration id function.  Could this be merged into the standard search?
+     *
+     * @throws Exception
+     */
+    @Test
+    public void shouldReturnNSPCCByRegId() throws Exception {
+
+        Charity nspcc = new Charity(2L,"National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
+        //Charity rspca = new Charity(3L,"Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
+        ArrayList<Charity> charities = new ArrayList<>();
+        charities.add(nspcc);
+        //charities.add(rspca);
+
+        given(this.charityService.findCharities("12345678")).willReturn(charities);
+
+
+        this.mockMvc.perform(get("/findCharity?search=12345678")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("National Society")))
+        ;
+    }
+
+
+    @Test
+    public void shouldReturnTwoCats() throws Exception {
+
+        Charity catsCardiff = new Charity(2L, "Cats Protection Cardiff", "", "cats charity", "cpl", "12345678", true);
+        Charity catsSwansea = new Charity(3L, "Cats Protection Swansea", "", "cats charity", "cpl", "12345678", true);
+        ArrayList<Charity> charities = new ArrayList<>();
+        charities.add(catsCardiff);
+        charities.add(catsSwansea);
+
+        given(this.charityService.findCharities("12345678")).willReturn(charities);
+
+
+        this.mockMvc.perform(get("/findCharity?search=12345678")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("Cats Protection Cardiff")))
+                .andExpect(content().string(containsString("Cats Protection Swansea")))
+        ;
+    }
+
+
+
+
 
     @Test
     public void shouldReturnHomePage() throws Exception {
@@ -47,64 +91,9 @@ public class CharitySearchTest {
                 .andExpect(content().string(containsString("Welcome to Charity Giving")));
     }
 
-    @Test
-    public void shouldFindNSPCC() throws Exception {
-
-        Charity nspcc = new Charity(2L,"National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity(3L, "Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
-        ArrayList<Charity> charities = new ArrayList<>();
-        charities.add(nspcc);
-        charities.add(rspca);
-
-        given(this.charityService.findCharities("NSPCC")).willReturn(charities);
-
-        mockMvc.perform(get("/findCharity")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("name", "NSPCC")
-
-        )
-                .andExpect(status().isOk())
-                .andExpect(view().name("charitySearchResults"))
-                .andExpect(model().attribute("searchTerm", "NSPCC"))
-                .andExpect(model().attribute("matches", hasItem(nspcc)))
-                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=charityListContainer", "National Society", "12345678", "</div>"))));
-                ;
 
 
 
-    }
-
-    /**
-     * What should happen if the charity can't be found?
-     * Page should say that no charities could be matched and offer a link back to home page.
-     */
-
-    @Test
-    public void shouldNotFindCRUK() throws Exception {
-
-        Charity nspcc = new Charity(2L,"National Society for the Prevention of Cruelty to Children", "NSPCC", "Kids charity", "nspcc", "12345678", true);
-        Charity rspca = new Charity(3L, "Royal Society for the Prevention of Cruelty to Animals", "RSPCA", "Animal charity", "rspca", "87654321", true);
-        ArrayList<Charity> charities = new ArrayList<>();
-        charities.add(nspcc);
-        charities.add(rspca);
-
-        given(this.charityService.findCharities("NSPCC")).willReturn(charities);
-
-        mockMvc.perform(get("/findCharity")
-                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .param("name", "Cancer Research UK")
-
-        )
-                .andExpect(status().isOk())
-                .andExpect(view().name("charitySearchResults"))
-                .andExpect(model().attribute("searchTerm", "Cancer Research UK"))
-                .andExpect(model().attribute("matches", iterableWithSize(0)))
-                .andExpect(content().string(stringContainsInOrder(Arrays.asList("<div id=missingCharityMessage>","No matching charity","</div>"))));
-        ;
-
-
-
-    }
 
 
 }

@@ -52,10 +52,10 @@ public class CharityApiTest {
         charities.add(nspcc);
         //charities.add(rspca);
 
-        given(this.charityService.findByRegistrationNumber("12345678")).willReturn(charities);
+        given(this.charityService.findById(2L)).willReturn(Optional.of(nspcc));
 
 
-        this.mockMvc.perform(get("/api/charity/12345678").contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/api/charity/2").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.acronym", is("NSPCC")));

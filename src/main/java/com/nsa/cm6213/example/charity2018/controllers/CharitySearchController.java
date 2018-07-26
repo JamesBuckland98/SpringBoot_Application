@@ -1,7 +1,11 @@
 package com.nsa.cm6213.example.charity2018.controllers;
 
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResourceException;
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.NonUniqueResourceException;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import com.nsa.cm6213.example.charity2018.services.CharityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,9 @@ import java.util.List;
 //This is a controller.  It is NOT a RestController.  It is part of the Spring MVC framework so more aligned with server-side generation of HTML.
 public class CharitySearchController {
 
+    static final Logger LOG = LoggerFactory.getLogger(CharitySearchController.class);
+
+
     private CharityService charityService;
 
     @Autowired
@@ -22,25 +29,22 @@ public class CharitySearchController {
         charityService = aService;
     }
 
-    @RequestMapping(path = "/findCharity", method = RequestMethod.GET) //handles a form POST to /name
-    //public String postName(@ModelAttribute CharityForm in_form, Model model) { //ModelAttribute maps the form to an object
-    public String postName(@RequestParam String name, Model model) { //ModelAttribute maps the form to an object
 
-        //remove singleton call.  Spring now wires in the service
-        //CharityService charityService = CharityServiceStatic.getInstance();
+    @RequestMapping(path = "/findCharity", method = RequestMethod.GET)
+    public String getCharityProfile(@RequestParam("search") String search, Model model) {
 
-        //String searchTerm  = in_form.getName();
+        LOG.debug("Handling /findCharity");
 
-        //System.out.println("name equals " + in_form.getName());//we can access the form as a normal object
-
-        List<Charity> matchingCharities = charityService.findCharities(name);
+        List<Charity> charity = charityService.findCharities(search);
 
 
-        model.addAttribute("searchTerm", name);
-        model.addAttribute("matches", matchingCharities);
+        model.addAttribute("searchTerm", search);
+            model.addAttribute("matches", charity);
 
 
         return "charitySearchResults"; //the return is the name of the next page (but we're not doing templating, so we redirect to the home page.
+
+
     }
 
     /*
