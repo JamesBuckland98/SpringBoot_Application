@@ -1,5 +1,6 @@
 package com.nsa.cm6213.example.charity2018.services;
 
+import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResourceException;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import com.nsa.cm6213.example.charity2018.repositories.CharityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +23,22 @@ public class CharityServiceStatic implements CharityService {
         charityRepository = aRepo;
     }
 
-    public List<Charity> findCharities(String searchTerm){
+    public List<Charity> findCharities(String searchTerm) {
 
         return charityRepository.findBySearchTerm(searchTerm);
     }
 
 
-    public Optional<Charity> findById(Long id){
-        return charityRepository.findOne(id);
-    }
+    public Charity findById(Long id) {
 
+        Optional<Charity> charity = charityRepository.findOne(id);
+
+        if (charity.isPresent()) {
+            return charity.get();
+        } else {
+            throw new MissingResourceException("No charity with id" + id);
+        }
+    }
 
 
 }

@@ -4,6 +4,8 @@ import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResource
 import com.nsa.cm6213.example.charity2018.controllers.exceptions.NonUniqueResourceException;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import com.nsa.cm6213.example.charity2018.services.CharityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ import java.util.List;
 //This is a controller.  It is NOT a RestController.  It is part of the Spring MVC framework so more aligned with server-side generation of HTML.
 public class CharitySearchController {
 
+    static final Logger LOG = LoggerFactory.getLogger(CharitySearchController.class);
+
+
     private CharityService charityService;
 
     @Autowired
@@ -28,17 +33,13 @@ public class CharitySearchController {
     @RequestMapping(path = "/findCharity", method = RequestMethod.GET)
     public String getCharityProfile(@RequestParam("search") String search, Model model) {
 
+        LOG.debug("Handling /findCharity");
 
         List<Charity> charity = charityService.findCharities(search);
 
-        if (charity.size() == 1) {
-            model.addAttribute("searchTerm", search);
+
+        model.addAttribute("searchTerm", search);
             model.addAttribute("matches", charity);
-        } else if (charity.size() > 1) {
-            throw new NonUniqueResourceException("More than one charity has that registration id", "/findCharity");
-        } else {
-            throw new MissingResourceException("No such charity", "/findCharity");
-        }
 
 
         return "charitySearchResults"; //the return is the name of the next page (but we're not doing templating, so we redirect to the home page.

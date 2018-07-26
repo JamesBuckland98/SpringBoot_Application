@@ -62,10 +62,10 @@ public class CharitySearchTest {
 
 
     @Test
-    public void shouldReturnTwoCatsAndFail() throws Exception {
+    public void shouldReturnTwoCats() throws Exception {
 
         Charity catsCardiff = new Charity(2L, "Cats Protection Cardiff", "", "cats charity", "cpl", "12345678", true);
-        Charity catsSwansea = new Charity(3L, "Cat Protection Swansea", "", "cats charity", "cpl", "12345678", true);
+        Charity catsSwansea = new Charity(3L, "Cats Protection Swansea", "", "cats charity", "cpl", "12345678", true);
         ArrayList<Charity> charities = new ArrayList<>();
         charities.add(catsCardiff);
         charities.add(catsSwansea);
@@ -73,21 +73,14 @@ public class CharitySearchTest {
         given(this.charityService.findCharities("12345678")).willReturn(charities);
 
 
-        this.mockMvc.perform(get("/findCharity?search=12345678")).andDo(print()).andExpect(status().isConflict())
-                .andExpect(content().string(containsString("More than one")))
+        this.mockMvc.perform(get("/findCharity?search=12345678")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("Cats Protection Cardiff")))
+                .andExpect(content().string(containsString("Cats Protection Swansea")))
         ;
     }
 
 
-    @Test
-    public void shouldReturnA404() throws Exception {
 
-        given(this.charityService.findCharities("123456789")).willReturn(new ArrayList<Charity>());
-
-
-        this.mockMvc.perform(get("/findCharity?search=123456789")).andDo(print()).andExpect(status().isNotFound())
-                .andExpect(content().string(containsString("No such charity")));
-    }
 
 
     @Test

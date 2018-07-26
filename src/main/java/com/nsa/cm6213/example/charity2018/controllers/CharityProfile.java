@@ -30,20 +30,19 @@ public class CharityProfile {
     @RequestMapping(path = "/charity/{id}", method = RequestMethod.GET)
     public String getCharityProfile(@PathVariable Long id, Model model) {
 
-
-        Optional<Charity> charity = charityService.findById(id);
-
-        System.out.println(charity.get());
-
-        if (charity.isPresent()) {
-            model.addAttribute("charity", charity.get());
-        } else {
-            throw new MissingResourceException("No such charity", "/findCharity");
-        }
+//        try {
+//            Charity charity = charityService.findById(id);
+//            model.addAttribute("charity", charity);
+//            return "CharityProfile";
+//        }
+//        catch(MissingResourceException e){
+//            throw e;
+//        }
 
 
+        Charity charity = charityService.findById(id);
+        model.addAttribute("charity", charity);
         return "CharityProfile";
-
 
     }
 

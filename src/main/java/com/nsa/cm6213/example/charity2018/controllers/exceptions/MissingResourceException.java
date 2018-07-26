@@ -9,8 +9,8 @@ public class MissingResourceException extends RuntimeException {
         returnUrl = aUrl;
     }
 
-    public MissingResourceException(String aUrl) {
-        this("Missing Resource", aUrl);
+    public MissingResourceException(String msg) {
+        this(msg, "/");
     }
 
     public MissingResourceException() {
