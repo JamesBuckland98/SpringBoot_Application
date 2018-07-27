@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
+
+
+    <!--
+    -->
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div id=paymentConfirmation>
+
+    Thank you : <br>
+    <div th:text="${donor.name}"></div>
+
+</div>
+You have donated
+<div th:text="${donor.donationAmount}"></div>
+to: <br>
+<div id="charityDetails">
+    <!-- Inject Charity Details here-->
+</div>
+
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer">
+</div>
+
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="/js/dustjs-2.7.2/dist/dust-full.js"></script>
+<script src="/js/js-url-2.5.3/url.js"></script>
+<script src="/js/app/charity.js"></script>
+
+<script th:inline="javascript">
+
+    var id = [[${id}]];
+
+
+</script>
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        injectCharity(id);
+    });
+
+</script>
+
+
+</body>
+</html>

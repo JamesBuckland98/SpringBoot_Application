@@ -1,10 +1,12 @@
 package com.nsa.cm6213.example.charity2018.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
 public class Donation {
 
     private Long id;
