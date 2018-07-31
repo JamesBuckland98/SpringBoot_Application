@@ -6,6 +6,7 @@ import com.nsa.cm6213.example.charity2018.domain.Donation;
 import com.nsa.cm6213.example.charity2018.repositories.DonationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DonationServiceImpl implements DonationService {
@@ -18,6 +19,7 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
+    @Transactional
     public void createDonation(Donation aDonation) {
         donationRepository.save(aDonation);
     }
