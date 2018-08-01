@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import com.nsa.cm6213.example.charity2018.controllers.CharitySearchController;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
@@ -48,11 +49,54 @@ public class DonationTest {
 
         this.webDriver.get("http://localhost:" + Integer.toString(port) + "/home.html");
         WebElement searchBox = this.webDriver.findElement(By.id("search"));
-        searchBox.clear();
-        searchBox.sendKeys("12345678");
+        searchBox.clear(); //clear the search box
+        searchBox.sendKeys("12345678"); //enter a search term
         this.webDriver.findElement(By.id("submit")).click();
-        assertThat(webDriver.findElement(By.id("charityListContainer")).getText()).contains("National");
-        //this.webDriver.findElement(By.id(""))
+        assertThat(webDriver.findElement(By.id("charityListContainer")).getText()).contains("National");  //now on charity results page
+        this.webDriver.findElement(By.id("charityLink1")).click(); //click
+        assertThat(webDriver.findElement(By.id("charityInfo")).getText()).contains("National"); //now on profile page
+        this.webDriver.findElement(By.id("donateLink1")).click();
+
+        assertThat(webDriver.getTitle().contains("National")); //now on donation page
+
+        this.webDriver.findElement(By.id("name")).clear();
+        this.webDriver.findElement(By.id("name")).sendKeys("Carl Jones");
+
+        this.webDriver.findElement(By.id("addressLine1")).clear();
+        this.webDriver.findElement(By.id("addressLine1")).sendKeys("45 Cwm Nofydd");
+
+        this.webDriver.findElement(By.id("addressLine2")).clear();
+        this.webDriver.findElement(By.id("addressLine2")).sendKeys("Rhiwbina");
+
+        this.webDriver.findElement(By.id("addressLine3")).clear();
+        this.webDriver.findElement(By.id("addressLine3")).sendKeys("Cardiff");
+
+        this.webDriver.findElement(By.id("postcode")).clear();
+        this.webDriver.findElement(By.id("postcode")).sendKeys("CF14 6JX");
+
+        this.webDriver.findElement(By.id("donationAmount")).clear();
+        this.webDriver.findElement(By.id("donationAmount")).sendKeys("100");
+
+        this.webDriver.findElement(By.id("isGiftAidEligible")).click();
+        this.webDriver.findElement(By.id("submit")).click();
+
+        assertThat(webDriver.getTitle().contains("Make Payment"));
+
+        this.webDriver.findElement(By.id("cardNumber")).clear();
+        this.webDriver.findElement(By.id("cardNumber")).sendKeys("1234567812345678");
+
+        this.webDriver.findElement(By.id("isCardAddressHomeAddress")).click();
+
+        this.webDriver.findElement(By.id("submit")).click();
+
+        assertThat(webDriver.getTitle().contains("Confirm Donation"));
+
+        this.webDriver.findElement(By.id("confirm")).click();
+
+        assertThat(webDriver.getTitle().contains("Thank you"));
+
+
+
     }
 }
 

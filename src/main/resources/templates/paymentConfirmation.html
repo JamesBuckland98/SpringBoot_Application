@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
+    <title>Confirm Donation</title>
 
 
     <!--
@@ -29,7 +29,7 @@ Using card: <br>
 <div th:text="'**** **** ****'+${last4Card}">
 </div>
 
-<a href="confirm">Confirm</a>
+<a id="confirm" href="confirm">Confirm</a>
 
 
 </div>
