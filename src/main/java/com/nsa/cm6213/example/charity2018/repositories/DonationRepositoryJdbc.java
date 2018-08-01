@@ -33,6 +33,9 @@ public class DonationRepositoryJdbc implements DonationRepository {
     @Value("${sql.donation.insert}")
     private String donationInsertSQL;
 
+    @Value("${sql.donation.last.id}")
+    private String lastDonationIdSQL;
+
     @Autowired
     public DonationRepositoryJdbc(JdbcTemplate aTemplate) {
         jdbcTemplate = aTemplate;
@@ -112,5 +115,13 @@ public class DonationRepositoryJdbc implements DonationRepository {
 
         LOG.debug(aDonation.toString());
 
+    }
+
+    @Override
+    public Long findLastDonationId() {
+        return jdbcTemplate.queryForObject(
+                lastDonationIdSQL,
+                new Object[]{},
+                Long.class);
     }
 }

@@ -7,4 +7,6 @@ public interface DonationRepository {
 
     public void save(Donation aDonation);
 
+    public Long findLastDonationId();
+
 }

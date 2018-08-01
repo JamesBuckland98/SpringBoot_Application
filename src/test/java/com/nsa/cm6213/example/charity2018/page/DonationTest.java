@@ -1,6 +1,8 @@
 package com.nsa.cm6213.example.charity2018.page;
 
 import static org.assertj.core.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -10,6 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 import com.nsa.cm6213.example.charity2018.controllers.CharitySearchController;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
+import com.nsa.cm6213.example.charity2018.domain.Donation;
+import com.nsa.cm6213.example.charity2018.repositories.DonationRepository;
 import com.nsa.cm6213.example.charity2018.services.CharityService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,6 +43,9 @@ public class DonationTest {
 
     @Value("${local.server.port}")
     private int port;
+
+    @Autowired
+    DonationRepository donationRepo;
 
     @Test
     public void searchShouldFindNSPCC() {
@@ -95,7 +102,9 @@ public class DonationTest {
 
         assertThat(webDriver.getTitle().contains("Thank you"));
 
+        Long lastDonationId = donationRepo.findLastDonationId();
 
+        assertTrue(lastDonationId.equals(1001L));
 
     }
 }
