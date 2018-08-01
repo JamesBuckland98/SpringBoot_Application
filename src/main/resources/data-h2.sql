@@ -1,4 +1,4 @@
-insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (1, null, 88, 'Moulton', 'Terrace', 'Kelasuri', 'HP5 4WL','GB');
+insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (1, null, 88, 'DemoData', 'Terrace', 'Kelasuri', 'HP5 4WL','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (2, null, 182, 'Cody', 'Park', 'Côn Sơn', 'ON3 8LR','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (3, null, 121, 'Southridge', 'Trail', 'Rueil-Malmaison', 'KB9 1SD','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (4, null, 119, 'Melody', 'Park', 'Selikhino', 'QI9 4NM','GB');
@@ -2004,15 +2004,15 @@ insert into donor (id, first_name, last_name, address_id) values (1000, 'Freida'
 
 /******************************************************************************************/
 
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('1', '12345678', 'NSPCC', 'Child protection', 'nspcc');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('2', '12312433', 'Cancer Research UK', 'Cancer Research and prevention', 'cruk');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('3', '12279188', 'Cancer Research Wales', 'Cancer Research and prevention', 'crw');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('4', '12245943', 'Amnesty International', 'Human Rights Upkeep', 'amnesty');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('5', 'S12212698', 'Cancer Scotland', 'Cancer Research and prevention', 'cancer_scotland');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('6', '12179453', 'British Heart Foundation', 'Heart Disease Research and prevention', 'bhf');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('7', '12146208', 'Kidney Research UK', 'Kidney Disease Research and preventation', 'kruf');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('8', '12112963', 'Oxfam', 'Worldwide aid', 'oxfam');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('9', '12079718', 'Greenpeace', 'Environmental protection and upkeep', 'greenpeace');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('1', '12345678', 'NSPCC', 'Child protection', 'nspcc');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('2', '12312433', 'Cancer Research UK', 'Cancer Research and prevention', 'cruk');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('3', '12279188', 'Cancer Research Wales', 'Cancer Research and prevention', 'crw');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('4', '12245943', 'Amnesty International', 'Human Rights Upkeep', 'amnesty');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('5', 'S12212698', 'Cancer Scotland', 'Cancer Research and prevention', 'cancer_scotland');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('6', '12179453', 'British Heart Foundation', 'Heart Disease Research and prevention', 'bhf');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('7', '12146208', 'Kidney Research UK', 'Kidney Disease Research and preventation', 'kruf');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('8', '12112963', 'Oxfam', 'Worldwide aid', 'oxfam');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('9', '12079718', 'Greenpeace', 'Environmental protection and upkeep', 'greenpeace');
 
 /****************************************************************************************************/
 
@@ -4074,14 +4074,14 @@ where id % 5=0;
 
 /**************************************************************************************/
 
-UPDATE `donations`.`charity` SET `name` = 'National Society for Preventation of Cruelty to Children', `acronym` = 'NSPCC' WHERE (`id` = '1');
-UPDATE `donations`.`charity` SET `acronym` = 'CRUK' WHERE (`id` = '2');
-UPDATE `donations`.`charity` SET `acronym` = 'BHF' WHERE (`id` = '6');
-UPDATE `donations`.`charity` SET `acronym` = 'KRUK' WHERE (`id` = '7');
+UPDATE `charity` SET `name` = 'National Society for Preventation of Cruelty to Children', `acronym` = 'NSPCC' WHERE (`id` = '1');
+UPDATE `charity` SET `acronym` = 'CRUK' WHERE (`id` = '2');
+UPDATE `charity` SET `acronym` = 'BHF' WHERE (`id` = '6');
+UPDATE `charity` SET `acronym` = 'KRUK' WHERE (`id` = '7');
 
 
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('20', '88888888', 'Cats Protection League (Cardiff)', 'Helping cats', 'cpl');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('21', '88888888', 'Cats Protection League (Swansea)', 'Helping cats', 'cpl');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('20', '88888888', 'Cats Protection League (Cardiff)', 'Helping cats', 'cpl');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('21', '88888888', 'Cats Protection League (Swansea)', 'Helping cats', 'cpl');
 
 
 

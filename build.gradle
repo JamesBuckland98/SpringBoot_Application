@@ -23,6 +23,17 @@ repositories {
     mavenCentral()
 }
 
+test {
+    exclude 'com/nsa/cm6213/example/charity2018/page/**'
+}
+
+bootRun {
+//    addResources = false
+//    environment 'spring.profiles.active', 'production'
+    systemProperty 'spring.profiles.active', 'demo'
+    main = 'com.nsa.cm6213.example.charity2018.Charity2018Application'
+}
+
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')

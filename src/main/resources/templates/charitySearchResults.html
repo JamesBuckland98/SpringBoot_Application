@@ -25,7 +25,7 @@
         <tbody>
         <tr th:each="charity : ${matches}">
             <td>
-                <a th:href="@{/charity/{id} (id=${charity.id})}">
+                <a th:id="charityLink" +${charity.id} th:href="@{/charity/{id} (id=${charity.id})}">
                     <span th:text="${charity.name}"></span>
                 </a>
             </td>

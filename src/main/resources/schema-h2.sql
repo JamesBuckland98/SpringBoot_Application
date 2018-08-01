@@ -1,13 +1,5 @@
 SET MODE MySQL;
-
-
-
-
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
-CREATE SCHEMA `donations`  ;
-USE `donations` ;
+SET IGNORECASE=TRUE;
 
 -- -----------------------------------------------------
 -- Table `charity`
@@ -40,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `sponsor_form` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-create table sponsor_form_temp (
+create table IF NOT EXISTS sponsor_form_temp (
 	id INT,
 	fundraiser_name VARCHAR(50),
 	charity_id VARCHAR(5),
@@ -51,7 +43,7 @@ create table sponsor_form_temp (
 	furl VARCHAR(50))
 ENGINE = InnoDB;
 
-create table donations_temp (
+create table IF NOT EXISTS donations_temp (
 	id INT,
 	amount_in_pence INT,
 	donation_date varchar(15),
@@ -132,7 +124,7 @@ ENGINE = InnoDB;
 
 
 
-ALTER TABLE `donations`.`bank_account` 
+ALTER TABLE `bank_account`
 CHANGE COLUMN `last_valid_day` `last_valid_day` DATE NULL ;
 
 

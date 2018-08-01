@@ -52,6 +52,7 @@ public class DonationTest {
         searchBox.sendKeys("12345678");
         this.webDriver.findElement(By.id("submit")).click();
         assertThat(webDriver.findElement(By.id("charityListContainer")).getText()).contains("National");
+        //this.webDriver.findElement(By.id(""))
     }
 }
 

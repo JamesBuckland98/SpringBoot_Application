@@ -1,4 +1,4 @@
-insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (1, null, 88, 'Moulton', 'Terrace', 'Kelasuri', 'HP5 4WL','GB');
+insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (1, null, 88, 'testData', 'Terrace', 'Kelasuri', 'HP5 4WL','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (2, null, 182, 'Cody', 'Park', 'Côn Sơn', 'ON3 8LR','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (3, null, 121, 'Southridge', 'Trail', 'Rueil-Malmaison', 'KB9 1SD','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (4, null, 119, 'Melody', 'Park', 'Selikhino', 'QI9 4NM','GB');
