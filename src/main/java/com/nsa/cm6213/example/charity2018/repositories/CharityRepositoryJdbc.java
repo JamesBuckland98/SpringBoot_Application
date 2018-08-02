@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class CharityRepositoryJdbc implements CharityRepository {
 
     private JdbcTemplate jdbcTemplate;
@@ -53,7 +53,7 @@ public class CharityRepositoryJdbc implements CharityRepository {
     }
 
     @Override
-    public Optional<Charity> findOne(Long id) {
+    public Optional<Charity> findById(Long id) {
 
         return Optional.of(
                 jdbcTemplate.queryForObject(

@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `charity` (
   `purpose` VARCHAR(500) NOT NULL,
   `logo_file_name` VARCHAR(100) NULL,
   `acronym` VARCHAR (10) NULL,
+  is_active VARCHAR(1) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -137,3 +138,6 @@ CREATE TABLE IF NOT EXISTS `bank_account_temp` (
   `last_valid_day` VARCHAR(15),
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+ALTER TABLE `donations`.`charity`
+ADD COLUMN `is_active` VARCHAR(1) NULL DEFAULT NULL;

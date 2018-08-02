@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 public interface DonationRepository {
 
-    public void save(Donation aDonation);
+    public Donation save(Donation aDonation);
 
     public Long findLastDonationId();
 

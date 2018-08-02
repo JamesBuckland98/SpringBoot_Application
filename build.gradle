@@ -37,11 +37,12 @@ bootRun {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
-    //compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("com.h2database:h2")
+    compile group:'javax.xml.bind', name: 'jaxb-api'
 
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('mysql:mysql-connector-java')

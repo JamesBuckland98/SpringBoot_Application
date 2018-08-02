@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface CharityRepository {
 
-    public Optional<Charity> findOne(Long id);
+    public Optional<Charity> findById(Long id);
 
     public List<Charity> findBySearchTerm(String name);
 
