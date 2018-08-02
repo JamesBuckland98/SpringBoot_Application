@@ -33,7 +33,7 @@ public class CharityProfile {
         Optional<Charity> charity = charityService.findById(id);
         if (charity.isPresent()) {
             model.addAttribute("charity", charity.get());
-            return "CharityProfile";
+            return "charityProfile";
         } else {
             throw new MissingResourceException("No matching charity", "404");
         }

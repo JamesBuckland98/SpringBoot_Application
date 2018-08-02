@@ -24,7 +24,7 @@
 
     <div th:text="${charity.description}"></div>
 
-    <a th:href="@{/donate/{id} (id=${charity.id})}">
+    <a th:id="@{donateLink{id} (id=${charity.id})}" th:href="@{/donate/{id} (id=${charity.id})}">
         <span>Donate</span>
     </a>
 

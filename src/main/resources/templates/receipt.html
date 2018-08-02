@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Confirm Donation</title>
+    <title>Thank you</title>
 
 
     <!--
@@ -18,18 +18,12 @@
     <div th:text="${donor.name}"></div>
 
 </div>
-You are about to donate
+You have donated
 <div th:text="${donor.donationAmount}"></div>
 to: <br>
 <div id="charityDetails">
     <!-- Inject Charity Details here-->
 </div>
-
-Using card: <br>
-<div th:text="'**** **** ****'+${last4Card}">
-</div>
-
-<a id="confirm" href="confirm">Confirm</a>
 
 
 </div>

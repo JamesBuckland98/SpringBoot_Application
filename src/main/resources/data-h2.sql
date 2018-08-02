@@ -1,4 +1,4 @@
-insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (1, null, 88, 'Moulton', 'Terrace', 'Kelasuri', 'HP5 4WL','GB');
+insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (1, null, 88, 'DemoData', 'Terrace', 'Kelasuri', 'HP5 4WL','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (2, null, 182, 'Cody', 'Park', 'Côn Sơn', 'ON3 8LR','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (3, null, 121, 'Southridge', 'Trail', 'Rueil-Malmaison', 'KB9 1SD','GB');
 insert into address (id, building_name, building_number, street, district, city, postal_code, country_iso_code) values (4, null, 119, 'Melody', 'Park', 'Selikhino', 'QI9 4NM','GB');
@@ -2004,34 +2004,19 @@ insert into donor (id, first_name, last_name, address_id) values (1000, 'Freida'
 
 /******************************************************************************************/
 
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('1', '12345678', 'NSPCC', 'Child protection', 'nspcc');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('2', '12312433', 'Cancer Research UK', 'Cancer Research and prevention', 'cruk');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('3', '12279188', 'Cancer Research Wales', 'Cancer Research and prevention', 'crw');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('4', '12245943', 'Amnesty International', 'Human Rights Upkeep', 'amnesty');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('5', 'S12212698', 'Cancer Scotland', 'Cancer Research and prevention', 'cancer_scotland');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('6', '12179453', 'British Heart Foundation', 'Heart Disease Research and prevention', 'bhf');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('7', '12146208', 'Kidney Research UK', 'Kidney Disease Research and preventation', 'kruf');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('8', '12112963', 'Oxfam', 'Worldwide aid', 'oxfam');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('9', '12079718', 'Greenpeace', 'Environmental protection and upkeep', 'greenpeace');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('1', '12345678', 'NSPCC', 'Child protection', 'nspcc');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('2', '12312433', 'Cancer Research UK', 'Cancer Research and prevention', 'cruk');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('3', '12279188', 'Cancer Research Wales', 'Cancer Research and prevention', 'crw');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('4', '12245943', 'Amnesty International', 'Human Rights Upkeep', 'amnesty');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('5', 'S12212698', 'Cancer Scotland', 'Cancer Research and prevention', 'cancer_scotland');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('6', '12179453', 'British Heart Foundation', 'Heart Disease Research and prevention', 'bhf');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('7', '12146208', 'Kidney Research UK', 'Kidney Disease Research and preventation', 'kruf');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('8', '12112963', 'Oxfam', 'Worldwide aid', 'oxfam');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('9', '12079718', 'Greenpeace', 'Environmental protection and upkeep', 'greenpeace');
 
 /****************************************************************************************************/
 
-DROP TABLE IF EXISTS `bank_account_temp` ;
 
-CREATE TABLE IF NOT EXISTS `bank_account_temp` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `charity_id` INT UNSIGNED NOT NULL,
-  `account_number` INT(11) NOT NULL,
-  `sort_code` INT(11) NOT NULL,
-  `last_valid_day` VARCHAR(15),
-  PRIMARY KEY (`id`),
-  INDEX `charity_fk_idx` (`charity_id` ASC),
-  CONSTRAINT `temp_bank_account_to_charity_fk`
-    FOREIGN KEY (`charity_id`)
-    REFERENCES `charity` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 /************************************************************************************/
 
@@ -2057,21 +2042,12 @@ insert into bank_account_temp (id, charity_id, account_number, sort_code, last_v
 insert into bank_account_temp (id, charity_id, account_number, sort_code, last_valid_day) values (20, 1, 33431064, 806072, '17/12/2019');
 
 insert into bank_account (id, charity_id, account_number, sort_code, last_valid_day)
-select id, charity_id, account_number, sort_code, str_to_date(last_valid_day,'%d/%m/%Y')
+select id, charity_id, account_number, sort_code, parsedatetime(last_valid_day,'dd/MM/yyyy')
 from bank_account_temp;
 
 /***************************************************************************************/
 
-create table sponsor_form_temp (
-	id INT,
-	fundraiser_name VARCHAR(50),
-	charity_id VARCHAR(5),
-	fundraising_action TEXT,
-	date_created varchar(15),
-	first_valid_day varchar(15),
-	last_valid_day varchar(15),
-	furl VARCHAR(50)
-);
+
 insert into sponsor_form_temp (id, fundraiser_name, charity_id, fundraising_action, date_created, first_valid_day, last_valid_day, furl) values (1, 'Mordecai Rumney', 1, 'Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula.', '16/09/2016', '14/10/2016', '06/06/2017', 'mrumney0');
 insert into sponsor_form_temp (id, fundraiser_name, charity_id, fundraising_action, date_created, first_valid_day, last_valid_day, furl) values (2, 'Eba Cashen', 9, 'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.', '20/05/2017', '01/10/2017', '26/03/2017', 'ecashen1');
 insert into sponsor_form_temp (id, fundraiser_name, charity_id, fundraising_action, date_created, first_valid_day, last_valid_day, furl) values (3, 'Skipp Message', 9, 'Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.', '23/06/2017', '03/11/2016', '21/11/2017', 'smessage2');
@@ -3077,23 +3053,12 @@ insert into sponsor_form_temp (id, fundraiser_name, charity_id, fundraising_acti
 /**************************************************************************************/
 
 insert into sponsor_form (id, fundraiser_name, charity_id, fundraising_action, date_created, first_valid_day, last_valid_day, furl)
-select id, fundraiser_name, charity_id, fundraising_action, str_to_date(date_created,'%d/%m/%Y'), str_to_date(first_valid_day,'%d/%m/%Y'), str_to_date(last_valid_day,'%d/%m/%Y'), furl
+select id, fundraiser_name, charity_id, fundraising_action, parsedatetime(date_created,'dd/MM/yyyy'), parsedatetime(first_valid_day,'dd/MM/yyyy'), parsedatetime(last_valid_day,'dd/MM/yyyy'), furl
 from sponsor_form_temp;
 
 /*************************************************************************************/
 
-drop  table if exists donations_temp;
-create table donations_temp (
-	id INT,
-	amount_in_pence INT,
-	donation_date varchar(15),
-	is_own_money INT,
-	has_no_benefit_to_donor INT,
-	wishes_to_gift_aid INT,
-	donor_id VARCHAR(4),
-	sponsor_form_id VARCHAR(8),
-	charity_id VARCHAR(5)
-);
+
 insert into donations_temp (id, amount_in_pence, donation_date, is_own_money, has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id) values (1, 583484, '16/03/2017', 0, 0, 0, 675, null, 2);
 insert into donations_temp (id, amount_in_pence, donation_date, is_own_money, has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id) values (2, 696377, '15/10/2016', 0, 0, 1, 192, null, 8);
 insert into donations_temp (id, amount_in_pence, donation_date, is_own_money, has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id) values (3, 994561, '25/09/2016', 0, 0, 0, 778, 796, 9);
@@ -4096,7 +4061,7 @@ insert into donations_temp (id, amount_in_pence, donation_date, is_own_money, ha
 insert into donations_temp (id, amount_in_pence, donation_date, is_own_money, has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id) values (1000, 437897, '21/12/2016', 1, 1, 0, 207, 781, 1);
 
 insert into donation (id, amount_in_pence, donation_date, is_own_money, has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id)
-select id, amount_in_pence, str_to_date(donation_date,'%d/%m/%Y'), is_own_money, has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id
+select id, amount_in_pence, parsedatetime(donation_date,'dd/MM/yyyy'), is_own_money, has_no_benefit_to_donor, wishes_to_gift_aid, donor_id, sponsor_form_id, charity_id
 from donations_temp;
 
 update donation
@@ -4109,14 +4074,14 @@ where id % 5=0;
 
 /**************************************************************************************/
 
-UPDATE `donations`.`charity` SET `name` = 'National Society for Preventation of Cruelty to Children', `acronym` = 'NSPCC' WHERE (`id` = '1');
-UPDATE `donations`.`charity` SET `acronym` = 'CRUK' WHERE (`id` = '2');
-UPDATE `donations`.`charity` SET `acronym` = 'BHF' WHERE (`id` = '6');
-UPDATE `donations`.`charity` SET `acronym` = 'KRUK' WHERE (`id` = '7');
+UPDATE `charity` SET `name` = 'National Society for Preventation of Cruelty to Children', `acronym` = 'NSPCC' WHERE (`id` = '1');
+UPDATE `charity` SET `acronym` = 'CRUK' WHERE (`id` = '2');
+UPDATE `charity` SET `acronym` = 'BHF' WHERE (`id` = '6');
+UPDATE `charity` SET `acronym` = 'KRUK' WHERE (`id` = '7');
 
 
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('20', '88888888', 'Cats Protection League (Cardiff)', 'Helping cats', 'cpl');
-INSERT INTO `donations`.`charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('21', '88888888', 'Cats Protection League (Swansea)', 'Helping cats', 'cpl');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('20', '88888888', 'Cats Protection League (Cardiff)', 'Helping cats', 'cpl');
+INSERT INTO `charity` (`id`, `registration_id`, `name`, `purpose`, `logo_file_name`) VALUES ('21', '88888888', 'Cats Protection League (Swansea)', 'Helping cats', 'cpl');
 
 
 

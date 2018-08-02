@@ -23,6 +23,17 @@ repositories {
     mavenCentral()
 }
 
+test {
+    exclude 'com/nsa/cm6213/example/charity2018/page/**'
+}
+
+bootRun {
+//    addResources = false
+//    environment 'spring.profiles.active', 'production'
+    systemProperty 'spring.profiles.active', 'demo'
+    main = 'com.nsa.cm6213.example.charity2018.Charity2018Application'
+}
+
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
@@ -30,8 +41,21 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile("com.h2database:h2")
+
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('mysql:mysql-connector-java')
     compileOnly('org.projectlombok:lombok')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.32'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.13.0'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-support', version: '3.13.0'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '3.13.0'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.13.0'
+
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-htmlunit-driver', version: '2.52.0'
+    testCompile group: 'org.w3c.css', name: 'sac', version: '1.3'
+
+
 }
