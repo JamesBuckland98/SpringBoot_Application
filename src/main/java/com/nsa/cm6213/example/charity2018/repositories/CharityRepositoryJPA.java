@@ -15,7 +15,7 @@ public interface CharityRepositoryJPA extends JpaRepository<Charity, Long>, Char
 
 //    sql.charity.by.search=select id, acronym, name, purpose, logo_file_name, registration_id  from charity where acronym=? or name like ? or registration_id = ?
 
-    @Query(value = "select * from charity where acronym=:term or name like '%'||:term||'%' or registration_id = :term", nativeQuery = true)
+    @Query(value = "select c from Charity c where c.acronym like %:term% or c.registrationNumber like %:term% or c.name LIKE %:term% ")
     public List<Charity> findBySearchTerm(@Param("term") String term);
 
 

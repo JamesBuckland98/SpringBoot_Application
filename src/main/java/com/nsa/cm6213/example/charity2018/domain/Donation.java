@@ -42,4 +42,10 @@ public class Donation {
     @JoinColumn(name = "charity_id")
     private Charity charity;
 
+    public void setWishesToGiftAid(Boolean yesNo) {
+        this.wishesToGiftAid = yesNo;
+        this.hasNoBenefitToDonor = yesNo;
+        this.isOwnMoney = yesNo;
+    }
+
 }

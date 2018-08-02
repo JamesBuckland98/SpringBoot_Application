@@ -43,6 +43,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("com.h2database:h2")
     compile group:'javax.xml.bind', name: 'jaxb-api'
+    compile "p6spy:p6spy:3.0.0"
+
 
     runtime('org.springframework.boot:spring-boot-devtools')
     runtime('mysql:mysql-connector-java')

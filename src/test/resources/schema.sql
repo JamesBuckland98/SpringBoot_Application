@@ -139,5 +139,4 @@ CREATE TABLE IF NOT EXISTS `bank_account_temp` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-ALTER TABLE `donations`.`charity`
-ADD COLUMN `is_active` VARCHAR(1) NULL DEFAULT NULL;
+
