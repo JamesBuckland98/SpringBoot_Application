@@ -13,7 +13,19 @@ import java.util.List;
 @Repository
 public interface CharityRepositoryJPA extends JpaRepository<Charity, Long>, CharityRepository {
 
-//    sql.charity.by.search=select id, acronym, name, purpose, logo_file_name, registration_id  from charity where acronym=? or name like ? or registration_id = ?
+    /**
+     * Returns a list of charities that "like" match the term on acronym, reference number or name.
+     * The binding can only be done once, and it appears that the last binding wins.
+     * <p>
+     * Alternatives would be
+     * to custom implement the repository
+     * to use a separate DonationSearchRepository and use JDBC
+     * to change the method signature so that the term is based over more than once
+     * to do separate searches and combine in Java     *
+     *
+     * @param term
+     * @return
+     */
 
     @Query(value = "select c from Charity c where c.acronym like %:term% or c.registrationNumber like %:term% or c.name LIKE %:term% ")
     public List<Charity> findBySearchTerm(@Param("term") String term);
