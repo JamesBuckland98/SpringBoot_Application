@@ -77,7 +77,7 @@ public class DonationController {
         Address address = new Address(null, null, null,
                 donor.getAddressLine1(),
                 donor.getAddressLine2(),
-                donor.getAddressLine3(),
+                donor.getCity(),
                 donor.getPostcode(),
                 "UK");
 

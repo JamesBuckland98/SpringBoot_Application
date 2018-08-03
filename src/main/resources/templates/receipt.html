@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Thank you</title>
+<head th:replace="fragments/header :: head"></head>
 
-
-    <!--
-    -->
-</head>
 <body>
 
 <div th:replace="fragments/header :: header"></div>
 
-<div id=paymentConfirmation>
+<main role="main" class="container mt-4">
+    <div class="starter-template">
 
-    Thank you : <br>
-    <div th:text="${donor.name}"></div>
+        <div id=paymentConfirmation class="row">
 
-</div>
-You have donated
-<div th:text="${donor.donationAmount}"></div>
-to: <br>
-<div id="charityDetails">
-    <!-- Inject Charity Details here-->
-</div>
+            <h3>Thank you :
+                <div th:text=" ${donor.name}">
 
+                </div>
+            </h3>
 
-</div>
+        </div>
+        <div class="row mt-4 h3">
+
+            <span class="badge badge-secondary"
+                  th:text="'You have donated £' + ${#numbers.formatDecimal(donor.donationAmount,1,2)} + ' to:'"></span>
+            <div id="charityDetails">
+                <!-- Inject Charity Details here-->
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+</main>
 
 
 <div th:replace="fragments/footer :: footer">
@@ -49,6 +53,17 @@ to: <br>
 
 
 <script type="text/javascript">
+
+    var template =
+        "<img src=\"/images/{logoPath}.png\"/>" +
+        "<div>{name}" +
+        "</div>";
+
+
+    // Compile the template under the name 'hello'
+    var compiled = dust.compile(template, 'charityInfo');
+    // Register the template with Dust
+    dust.loadSource(compiled);
 
 
     $(document).ready(function () {

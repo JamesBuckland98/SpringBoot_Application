@@ -1,49 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
+<head th:replace="fragments/header :: head"></head>
 
-
-    <!--
-
-    -->
-
-</head>
 <body>
 
 <div th:replace="fragments/header :: header"></div>
 
-<div id="charityDetails">
-    <!-- Inject Charity Details here-->
-</div>
-
-<div id=donorDetails>
-
-    Please enter your details
-
-    <form action="/donorDetails" method="post">
-
-        <input type="text" name="name" id="name" value="Your name"/><br>
-        <input type="text" name="addressLine1" id="addressLine1" value="Address Line 1"/><br>
-        <input type="text" name="addressLine2" id="addressLine2" value="Address Line 2"/><br>
-        <input type="text" name="addressLine3" id="addressLine3" value="Address Line 3"/><br>
-        <input type="text" name="postcode" id="postcode" value="Postcode"/><br>
-
-        How much would you like to donate? (GB pounds only at present)
-
-        <input type="text" name="donationAmount" id="donationAmount" value="0.00"/><br>
-
-        Please tick this box to confirm that we can claim Gift Aid on this donation.
-
-        <input type="checkbox" name="isGiftAidEligible" id="isGiftAidEligible"/><br>
-
-        <input type="submit" id="submit" value="Go to payment"/><br>
-
-    </form>
+<main role="main" class="container mt-4">
+    <div class="starter-template">
 
 
-</div>
+        <div id="charityDetails">
+            <!-- Inject Charity Details here-->
+        </div>
+
+        <div id=donorDetails>
+
+            <h3>Please enter your details</h3>
+
+
+            <form action="/donorDetails" method="post">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Your name" class="form-control"
+                           aria-describedby="Enter your name"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="addressLine1">Address Line 1</label>
+                    <input type="text" name="addressLine1" id="addressLine1" placeholder="Address Line 1"
+                           class="form-control"
+                           aria-describedby="Enter the first line of your address"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="addressLine2">Address Line 2</label>
+                    <input type="text" name="addressLine2" id="addressLine2" placeholder="Address Line 2"
+                           class="form-control"
+                           aria-describedby="Enter the second line of your address"/>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="addressLine3">City</label>
+                    <input type="text" name="city" id="addressLine3"
+                           placeholder="Address Line 3"
+                           class="form-control"
+                           aria-describedby="Enter the city where you live"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="postcode">Postcode</label>
+                    <input type="text" name="postcode" id="postcode" placeholder="Postcode"
+                           class="form-control"
+                           aria-describedby="Enter your postcode"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="donationAmount">How much would you like to donate? (GB pounds only at present)</label>
+
+                    <input type="text" name="donationAmount" id="donationAmount" placeholder="10.00"
+                           class="form-control"
+                           aria-describedby="Please enter the amount you would like to donate"/>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox"
+                           name="isGiftAidEligible"
+                           id="isGiftAidEligible"
+                           class="form-check-input"
+                           aria-describedby="Please enter the amount you would like to donate"/>
+                    <label class="form-check-label"
+                           for="isGiftAidEligible">
+                        Please tick this box to confirm that we can claim Gift Aid on this donation.
+                    </label>
+                </div>
+
+                <button type="submit" id="submit" class="btn btn-primary-outline">Continue to payment</button>
+
+            </form>
+
+
+        </div>
+    </div>
+</main>
 
 
 <div th:replace="fragments/footer :: footer">
@@ -56,6 +97,17 @@
 <script src="/js/js-url-2.5.3/url.js"></script>
 <script src="/js/app/charity.js"></script>
 <script type="text/javascript">
+
+    var template = "<div> <h3> You are donating to: </h3>" +
+        "<img src=\"/images/{logoPath}.png\"/>" +
+        "<div>{name}</div>" +
+        "</div>";
+
+
+    // Compile the template under the name 'hello'
+    var compiled = dust.compile(template, 'charityInfo');
+    // Register the template with Dust
+    dust.loadSource(compiled);
 
     $(document).ready(function () {
         var id = $.url(2);

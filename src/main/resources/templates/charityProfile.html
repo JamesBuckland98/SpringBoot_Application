@@ -11,26 +11,39 @@
     <div>No matching charity</div>
 </div>
 
-<main role="main" class="container">
+<main role="main" class="container mt-4">
     <div class="starter-template">
-
-
         <div id=charityInfo th:if="${charity}">
 
-            <H1 th:text="${charity.name}">
+            <div class="row mt-4">
+                <div class="col-sm">
+                    <img th:attr="src=@{'/images/'+${charity.logoPath}+'.png'}"/>
+                </div>
+                <div class="col-md">
+                    <H3 th:text="${charity.name}">
 
-            </H1>
-
-            <img th:attr="src=@{'/images/'+${charity.logoPath}+'.png'}"/>
-
-            <div th:text="${charity.description}"></div>
-
-            <a th:id="@{donateLink{id} (id=${charity.id})}" th:href="@{/donate/{id} (id=${charity.id})}">
-                <span>Donate</span>
-            </a>
+                    </H3>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg border border-primary">
+                    <div th:text="${charity.description}"></div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg">
+                    <a class="btn btn-primary btn-lg btn-block" th:id="@{donateLink{id} (id=${charity.id})}"
+                       th:href="@{/donate/{id} (id=${charity.id})}">
+                        <span>Donate</span>
+                    </a>
+                </div>
+            </div>
 
         </div>
     </div>
+
+    </div>
+
 </main>
 
 

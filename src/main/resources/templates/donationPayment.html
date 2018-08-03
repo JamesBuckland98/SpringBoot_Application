@@ -1,39 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Make Payment</title>
+<head th:replace="fragments/header :: head"></head>
 
-</head>
 <body>
 
 <div th:replace="fragments/header :: header"></div>
 
-<div id=paymentDetails>
-    <div>
-        Make payment for &nbsp;
-        <div th:text="${id}"/>
+<main role="main" class="container mt-4">
+    <div class="starter-template">
+        <div class="row">
+            <div class="col-md">
+                <div id=paymentDetails>
+                    <h3>
+                        You are donating to the charity with registration number: &nbsp;
+                        <span th:text="${id}"/>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md">
+
+                <h3>Your details are:</h3>
+                <div th:text="${donor.name}"></div>
+                <div th:text="${donor.postcode}"></div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <form action="/paymentDetails" method="post">
+
+            <div class="form-group">
+                <label for="cardNumber">Please enter your card number</label>
+                <input type="text" name="cardNumber" id="cardNumber" placeholder="cardNumber"
+                       class="form-control"
+                       aria-describedby="Enter the long number on your credit or debit card"/>
+            </div>
+
+            <div class="form-group form-check">
+                <input type="checkbox"
+                       name="isCardAddressHomeAddress"
+                       id="isCardAddressHomeAddress"
+                       class="form-check-input"
+                       aria-describedby="Confirm that card holder address matches the address of the donor"/>
+                <label class="form-check-label"
+                       for="isCardAddressHomeAddress">
+                    Card holder address equals donor address?
+                </label>
+            </div>
+
+            <button type="submit" id="submit"
+                    class="btn btn-primary-outline">Proceed to Confirmation
+            </button>
+
+
+        </form>
+
     </div>
-
-    <div>
-
-        Your details:<br>
-        <div th:text="${donor.name}"></div>
-        <div th:text="${donor.postcode}"></div>
-
-    </div>
-
-    <form action="/paymentDetails" method="post">
-        <input type="text" name="cardNumber" id="cardNumber" value="cardNumber"/><br>
-
-        <input type="checkbox" name="isCardAddressHomeAddress" id="isCardAddressHomeAddress"/><br>
-
-        <input type="submit" id="submit" value="submit"/><br>
-
-
-    </form>
-
-</div>
+</main>
 
 
 <div th:replace="fragments/footer :: footer">

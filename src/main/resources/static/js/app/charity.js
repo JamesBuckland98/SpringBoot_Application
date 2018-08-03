@@ -1,14 +1,6 @@
 //dust.config.cache=false;
 
-var template = "Thank you for supporting {name}." +
-    "<H1>{acronym}</h1>" +
-    "<img src=\"/images/{logoPath}.png\"/>";
 
-
-// Compile the template under the name 'hello'
-var compiled = dust.compile(template, 'charityInfo');
-// Register the template with Dust
-dust.loadSource(compiled);
 
 var injectCharity = (function (id) {
 
