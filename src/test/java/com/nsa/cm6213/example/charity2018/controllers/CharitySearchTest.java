@@ -87,8 +87,8 @@ public class CharitySearchTest {
     public void shouldReturnHomePage() throws Exception {
 
 
-        this.mockMvc.perform(get("/home.html")).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Welcome to Charity Giving")));
+        this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+                .andExpect(content().string(containsString("Charity Giving")));
     }
 
 

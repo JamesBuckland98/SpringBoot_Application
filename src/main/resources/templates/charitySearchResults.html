@@ -13,29 +13,33 @@
 
 <main role="main" class="container">
     <div class="starter-template">
+        <div class="row">
 
-        <H1>Matches for <span th:text="${searchTerm}"></span></H1>
+            <h2>Matches for &quot;<span th:text="${searchTerm}"></span>&quot;</h2>
+        </div>
 
-
-        <div id=charityListContainer th:if="${not #lists.isEmpty(matches)}">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Registration Number</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="charity : ${matches}">
-                    <th scope="row">
-                        <a th:id="@{charityLink{id} (id=${charity.id})}" th:href="@{/charity/{id} (id=${charity.id})}">
-                            <span th:text="${charity.name}"></span>
-                        </a>
-                    </th>
-                    <td th:text="${charity.registrationNumber}"></td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="row">
+            <div id=charityListContainer th:if="${not #lists.isEmpty(matches)}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Registration Number</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="charity : ${matches}">
+                        <th scope="row">
+                            <a th:id="@{charityLink{id} (id=${charity.id})}"
+                               th:href="@{/charity/{id} (id=${charity.id})}">
+                                <span th:text="${charity.name}"></span>
+                            </a>
+                        </th>
+                        <td th:text="${charity.registrationNumber}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </main>

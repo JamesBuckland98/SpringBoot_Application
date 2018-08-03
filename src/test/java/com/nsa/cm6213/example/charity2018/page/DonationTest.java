@@ -54,7 +54,7 @@ public class DonationTest {
 
         webDriver = new ChromeDriver();
 
-        this.webDriver.get("http://localhost:" + Integer.toString(port) + "/home.html");
+        this.webDriver.get("http://localhost:" + Integer.toString(port) + "/");
         WebElement searchBox = this.webDriver.findElement(By.id("search"));
         searchBox.clear(); //clear the search box
         searchBox.sendKeys("12345678"); //enter a search term
