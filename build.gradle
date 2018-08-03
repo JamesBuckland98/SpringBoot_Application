@@ -28,8 +28,8 @@ test {
 }
 
 bootRun {
-//    addResources = false
-//    environment 'spring.profiles.active', 'production'
+    sourceResources sourceSets.main
+    //    environment 'spring.profiles.active', 'production'
     systemProperty 'spring.profiles.active', 'demo'
     main = 'com.nsa.cm6213.example.charity2018.Charity2018Application'
 }
@@ -46,7 +46,7 @@ dependencies {
     compile "p6spy:p6spy:3.0.0"
 
 
-    runtime('org.springframework.boot:spring-boot-devtools')
+    compile('org.springframework.boot:spring-boot-devtools')
     runtime('mysql:mysql-connector-java')
     compileOnly('org.projectlombok:lombok')
 

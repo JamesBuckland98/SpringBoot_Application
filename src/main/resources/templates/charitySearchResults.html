@@ -1,43 +1,47 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Charity Search Results</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-</head>
+
+<head th:replace="fragments/header :: head"></head>
+
 <body>
 
 <div th:replace="fragments/header :: header"></div>
-
-<H1>Matches for <span th:text="${searchTerm}"></span></H1>
 
 <div id=missingCharityMessage th:if="${#lists.isEmpty(matches)}">
     <div>No matching charity</div>
 </div>
 
-<div id=charityListContainer th:if="${not #lists.isEmpty(matches)}">
-    <table>
-        <thead>
-        <tr>
-            <td>Name</td>
-            <td>Registration Number</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="charity : ${matches}">
-            <td>
-                <a th:id="@{charityLink{id} (id=${charity.id})}" th:href="@{/charity/{id} (id=${charity.id})}">
-                    <span th:text="${charity.name}"></span>
-                </a>
-            </td>
-            <td th:text="${charity.registrationNumber}"></td>
-        </tr>
-        </tbody>
-    </table>
+<main role="main" class="container">
+    <div class="starter-template">
+
+        <H1>Matches for <span th:text="${searchTerm}"></span></H1>
 
 
-</div>
+        <div id=charityListContainer th:if="${not #lists.isEmpty(matches)}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Registration Number</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="charity : ${matches}">
+                    <th scope="row">
+                        <a th:id="@{charityLink{id} (id=${charity.id})}" th:href="@{/charity/{id} (id=${charity.id})}">
+                            <span th:text="${charity.name}"></span>
+                        </a>
+                    </th>
+                    <td th:text="${charity.registrationNumber}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 
-<div th:replace="fragments/footer :: footer">
+
+<div th:replace="fragments/footer :: footer"/>
 
 
 </body>
