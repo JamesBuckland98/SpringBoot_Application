@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.time.ZoneId;
 
-@Repository
+//@Repository
 public class DonationRepositoryJdbc implements DonationRepository {
 
     static final Logger LOG = LoggerFactory.getLogger(DonationRepositoryJdbc.class);
@@ -42,7 +42,7 @@ public class DonationRepositoryJdbc implements DonationRepository {
     }
 
     @Override
-    public void save(Donation aDonation) {
+    public Donation save(Donation aDonation) {
         Donor aDonor = aDonation.getDonor();
         Charity aCharity = aDonation.getCharity();
         Address address = aDonor.getAddress();
@@ -114,6 +114,8 @@ public class DonationRepositoryJdbc implements DonationRepository {
         aDonation.setId(holder.getKey().longValue());
 
         LOG.debug(aDonation.toString());
+
+        return aDonation;
 
     }
 

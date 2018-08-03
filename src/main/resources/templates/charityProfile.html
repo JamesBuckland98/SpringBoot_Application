@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${charity}? ${charity.name} + ' Profile' : 'No Matching Charity'">No Matching Charity</title>
 
-</head>
+<head th:replace="fragments/header :: head"></head>
+
 <body>
 
 <div th:replace="fragments/header :: header"></div>
@@ -13,22 +11,27 @@
     <div>No matching charity</div>
 </div>
 
+<main role="main" class="container">
+    <div class="starter-template">
 
-<div id=charityInfo th:if="${charity}">
 
-    <H1 th:text="${charity.name}">
+        <div id=charityInfo th:if="${charity}">
 
-    </H1>
+            <H1 th:text="${charity.name}">
 
-    <img th:attr="src=@{'/images/'+${charity.logoPath}+'.png'}"/>
+            </H1>
 
-    <div th:text="${charity.description}"></div>
+            <img th:attr="src=@{'/images/'+${charity.logoPath}+'.png'}"/>
 
-    <a th:id="@{donateLink{id} (id=${charity.id})}" th:href="@{/donate/{id} (id=${charity.id})}">
-        <span>Donate</span>
-    </a>
+            <div th:text="${charity.description}"></div>
 
-</div>
+            <a th:id="@{donateLink{id} (id=${charity.id})}" th:href="@{/donate/{id} (id=${charity.id})}">
+                <span>Donate</span>
+            </a>
+
+        </div>
+    </div>
+</main>
 
 
 <div th:replace="fragments/footer :: footer">

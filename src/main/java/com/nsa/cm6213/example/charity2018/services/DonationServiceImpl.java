@@ -19,7 +19,7 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = false)
     public void createDonation(Donation aDonation) {
         donationRepository.save(aDonation);
     }

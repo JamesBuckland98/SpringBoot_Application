@@ -1,12 +1,10 @@
 package com.nsa.cm6213.example.charity2018.services;
 
-import com.nsa.cm6213.example.charity2018.controllers.exceptions.MissingResourceException;
 import com.nsa.cm6213.example.charity2018.domain.Charity;
 import com.nsa.cm6213.example.charity2018.repositories.CharityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +29,7 @@ public class CharityServiceStatic implements CharityService {
 
     public Optional<Charity> findById(Long id) {
 
-        return charityRepository.findOne(id);
+        return charityRepository.findById(id);
 
     }
 
