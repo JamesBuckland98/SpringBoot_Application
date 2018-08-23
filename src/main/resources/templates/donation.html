@@ -19,60 +19,75 @@
             <h3>Please enter your details</h3>
 
 
-            <form action="/donorDetails" method="post">
+            <form action="#" th:action="@{/donorDetails}" th:object="${donor}" method="post">
 
                 <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" placeholder="Your name" class="form-control"
-                           aria-describedby="Enter your name"/>
+                    <label th:for="name">Name</label>
+                    <!--placeholder="Your name"-->
+                    <input type="text"
+                           class="form-control"
+                           aria-describedby="Enter your name"
+                           th:field="*{name}"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="addressLine1">Address Line 1</label>
-                    <input type="text" name="addressLine1" id="addressLine1" placeholder="Address Line 1"
+                    <label th:for="addressLine1">Address Line 1</label>
+                    <input type="text"
+                           th:field="*{addressLine1}"
+                           placeholder="Address Line 1"
                            class="form-control"
                            aria-describedby="Enter the first line of your address"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="addressLine2">Address Line 2</label>
-                    <input type="text" name="addressLine2" id="addressLine2" placeholder="Address Line 2"
+                    <label th:for="addressLine2">Address Line 2</label>
+                    <input type="text"
+                           th:field="*{addressLine2}"
+                           placeholder="Address Line 2"
                            class="form-control"
                            aria-describedby="Enter the second line of your address"/>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="addressLine3">City</label>
-                    <input type="text" name="city" id="addressLine3"
-                           placeholder="Address Line 3"
+                    <label th:for="city">City</label>
+                    <input type="text"
+                           th:field="*{city}"
+                           placeholder="City"
                            class="form-control"
                            aria-describedby="Enter the city where you live"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="postcode">Postcode</label>
-                    <input type="text" name="postcode" id="postcode" placeholder="Postcode"
+                    <label th:for="postcode">Postcode</label>
+                    <input type="text"
+                           th:field="*{postcode}"
+                           placeholder="Postcode"
                            class="form-control"
                            aria-describedby="Enter your postcode"/>
+                    <div class="alert alert-danger" th:if="${#fields.hasErrors('postcode')}" th:errors="*{postcode}">
+                        Postcode Error
+                    </div>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="donationAmount">How much would you like to donate? (GB pounds only at present)</label>
+                    <label th:for="donationAmount">How much would you like to donate? (GB pounds only at
+                        present)</label>
 
-                    <input type="text" name="donationAmount" id="donationAmount" placeholder="10.00"
+                    <input type="text" th:field="*{donationAmount}"
+                           placeholder="10.00"
                            class="form-control"
                            aria-describedby="Please enter the amount you would like to donate"/>
                 </div>
 
                 <div class="form-group form-check">
                     <input type="checkbox"
-                           name="isGiftAidEligible"
-                           id="isGiftAidEligible"
+                           th:field="*{isGiftAidEligible}"
                            class="form-check-input"
                            aria-describedby="Please enter the amount you would like to donate"/>
                     <label class="form-check-label"
-                           for="isGiftAidEligible">
+                           th:for="isGiftAidEligible">
                         Please tick this box to confirm that we can claim Gift Aid on this donation.
                     </label>
                 </div>

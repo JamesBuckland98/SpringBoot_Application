@@ -24,3 +24,5 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+spy.log
+src/main/resources/sql/

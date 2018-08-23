@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.StringTokenizer;
 
@@ -37,12 +39,21 @@ public class DonationController {
     public String startDonation(@PathVariable Long id, Model model) {
 
         model.addAttribute("id", id);
+        model.addAttribute("donor", new DonorForm());
         return "donation";
 
     }
 
     @RequestMapping(path = "donorDetails", method = RequestMethod.POST)
-    public String donorDetails(DonorForm donor, @SessionAttribute Long id, Model model) {
+    public String donorDetails(@SessionAttribute Long id, Model model, @ModelAttribute("donor") @Valid DonorForm donor, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            LOG.error(bindingResult.toString());
+            LOG.error("Donation Form has binding errors");
+            model.addAttribute("donor", donor);
+            model.addAttribute("id", id);
+            return "donation";
+        }
 
         LOG.debug(donor.toString());
 
