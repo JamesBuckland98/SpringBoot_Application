@@ -90,7 +90,7 @@ public class DonationTest {
         assertThat(webDriver.getTitle().contains("Make Payment"));
 
         this.webDriver.findElement(By.id("cardNumber")).clear();
-        this.webDriver.findElement(By.id("cardNumber")).sendKeys("1234567812345678");
+        this.webDriver.findElement(By.id("cardNumber")).sendKeys("4929602144515544");
 
         this.webDriver.findElement(By.id("isCardAddressHomeAddress")).click();
 
@@ -109,7 +109,7 @@ public class DonationTest {
     }
 
     @Test
-    public void searchStopWithValidationIssue() {
+    public void searchWithAnInvalidPostcode() {
 
         System.setProperty("webdriver.chrome.driver", "C:\\Projects\\Examples\\SpringBoot\\chromedriver.exe");
 
@@ -140,18 +140,28 @@ public class DonationTest {
         this.webDriver.findElement(By.id("city")).sendKeys("Cardiff");
 
         this.webDriver.findElement(By.id("postcode")).clear();
-        this.webDriver.findElement(By.id("postcode")).sendKeys("CF14 6JX");
+        this.webDriver.findElement(By.id("postcode")).sendKeys("CF14 6JXX");
 
         this.webDriver.findElement(By.id("donationAmount")).clear();
         this.webDriver.findElement(By.id("donationAmount")).sendKeys("100");
 
-        this.webDriver.findElement(By.id("isGiftAidEligible")).click();
+        this.webDriver.findElement(By.id("isGiftAidEligible1")).click();
+
         this.webDriver.findElement(By.id("submit")).click();
+
+        assertThat(webDriver.findElement(By.id("postcodeError")).getText()).contains("Invalid");  //now on charity results page
+
+        //correct the validation issue
+        this.webDriver.findElement(By.id("postcode")).clear();
+        this.webDriver.findElement(By.id("postcode")).sendKeys("CF14 6JX");
+
+        this.webDriver.findElement(By.id("submit")).click();
+
 
         assertThat(webDriver.getTitle().contains("Make Payment"));
 
         this.webDriver.findElement(By.id("cardNumber")).clear();
-        this.webDriver.findElement(By.id("cardNumber")).sendKeys("1234567812345678");
+        this.webDriver.findElement(By.id("cardNumber")).sendKeys("4929602144515544");
 
         this.webDriver.findElement(By.id("isCardAddressHomeAddress")).click();
 
