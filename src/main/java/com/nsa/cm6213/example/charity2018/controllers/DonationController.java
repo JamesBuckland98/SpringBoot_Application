@@ -60,15 +60,25 @@ public class DonationController {
         LOG.debug("From session..." + id);
         model.addAttribute("donor", donor);
         model.addAttribute("id", id);
+        model.addAttribute("payment", new PaymentForm());
+
         return "donationPayment";
     }
 
     @RequestMapping(path = "paymentDetails", method = RequestMethod.POST)
-    public String donorDetails(PaymentForm payment, @SessionAttribute DonorForm donor, @SessionAttribute Long id, Model model) {
+    public String donorDetails(@SessionAttribute DonorForm donor, @SessionAttribute Long id, Model model, @ModelAttribute("payment") @Valid PaymentForm payment, BindingResult bindingResult) {
 
         LOG.debug("From session..." + donor);
         LOG.debug("From session..." + id);
         LOG.debug(payment.toString());
+
+        if (bindingResult.hasErrors()) {
+            LOG.error(bindingResult.toString());
+            LOG.error("Payment Form has binding errors");
+            model.addAttribute("donor", donor);
+            model.addAttribute("id", id);
+            return "donationPayment";
+        }
 
 
         model.addAttribute("last4Card", payment.getCardNumber().substring(payment.getCardNumber().length() - 4));
